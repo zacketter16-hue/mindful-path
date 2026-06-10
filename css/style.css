@@ -108,7 +108,7 @@ nav a:hover { color: var(--primary); }
   position: relative;
   background:
     linear-gradient(rgba(26,15,15,0.72), rgba(58,15,15,0.78)),
-    url('https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1600&q=80')
+    url('https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1600&q=80')
       center/cover no-repeat;
   color: #fff;
 }
