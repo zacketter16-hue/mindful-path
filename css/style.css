@@ -1,11 +1,11 @@
 :root {
-  --primary: #5b8a72;
-  --primary-dark: #406354;
-  --bg: #f7f5f0;
+  --primary: #5c1a1a;
+  --primary-dark: #3a0f0f;
+  --bg: #f2f2f2;
   --card-bg: #ffffff;
-  --text: #2e2e2e;
-  --muted: #6b6b6b;
-  --accent: #e8b298;
+  --text: #1a1a1a;
+  --muted: #5e5e5e;
+  --accent: #4a4a4a;
   --radius: 14px;
   --shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
@@ -104,20 +104,29 @@ nav a:hover { color: var(--primary); }
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: 4rem 1.5rem 3rem;
+  padding: 7rem 1.5rem 6rem;
+  position: relative;
+  background:
+    linear-gradient(rgba(26,15,15,0.72), rgba(58,15,15,0.78)),
+    url('https://images.unsplash.com/photo-1586105251261-72a756497a11?auto=format&fit=crop&w=1600&q=80')
+      center/cover no-repeat;
+  color: #fff;
+}
+
+.hero-inner {
   max-width: 800px;
   margin: 0 auto;
 }
 
 .hero h1 {
-  font-size: 2.6rem;
+  font-size: 2.8rem;
   margin-bottom: 1rem;
-  color: var(--primary-dark);
+  color: #fff;
 }
 
 .hero p {
-  color: var(--muted);
-  font-size: 1.1rem;
+  color: rgba(255,255,255,0.9);
+  font-size: 1.15rem;
 }
 
 /* ---------- Widget Grid ---------- */
@@ -304,6 +313,54 @@ form input, form select, form textarea {
   border: 1px solid #ddd;
   border-radius: 8px;
   font-family: inherit;
+}
+
+/* ---------- Coach / About Me ---------- */
+.coach-section {
+  max-width: 1000px;
+}
+
+.coach {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 2.5rem;
+  align-items: center;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+  border-left: 5px solid var(--primary);
+}
+
+.coach-photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.coach-bio h3 {
+  color: var(--primary-dark);
+  font-size: 1.5rem;
+  margin-bottom: 0.3rem;
+}
+
+.coach-title {
+  color: var(--primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.coach-bio p { color: var(--text); margin-bottom: 0.9rem; }
+
+@media (max-width: 700px) {
+  .coach { grid-template-columns: 1fr; text-align: center; }
 }
 
 /* ---------- Footer ---------- */

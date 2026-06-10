@@ -7,7 +7,22 @@
       "Bash(git init *)",
       "Bash(git config *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Read(//private/tmp/**)",
+      "Bash(curl -L -o gh.pkg https://github.com/cli/cli/releases/download/v2.63.2/gh_2.63.2_macOS_arm64.pkg)",
+      "Bash(sudo installer -pkg gh.pkg -target /)",
+      "Bash(curl -L -o gh.tar.gz https://github.com/cli/cli/releases/download/v2.63.2/gh_2.63.2_macOS_arm64.tar.gz)",
+      "Bash(curl -sL https://api.github.com/repos/cli/cli/releases/latest)",
+      "Bash(curl -L -o gh.zip https://github.com/cli/cli/releases/download/v2.93.0/gh_2.93.0_macOS_arm64.zip)",
+      "Bash(unzip -o gh.zip -d gh_extract)",
+      "Bash(mkdir -p ~/bin)",
+      "Bash(cp /tmp/gh_extract/gh_2.93.0_macOS_arm64/bin/gh ~/bin/)",
+      "Bash(chmod +x ~/bin/gh)",
+      "Bash(~/bin/gh --version)",
+      "Bash(~/bin/gh auth *)",
+      "Bash(~/bin/gh repo *)",
+      "Bash(xargs sed -i '' 's/Mindful Path/Mental Fitness Lounge/g')",
+      "Bash(git push *)"
     ]
   }
 }
