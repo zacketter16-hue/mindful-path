@@ -29,7 +29,10 @@
       "Bash(~/bin/gh api *)",
       "Bash(dig +short mentalfitnesslounge.com A)",
       "Bash(dig +short www.mentalfitnesslounge.com CNAME)",
-      "Bash(python3)"
+      "Bash(python3)",
+      "Bash(curl -s https://mentalfitnesslounge.com)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://mentalfitnesslounge.com)",
+      "Bash(curl -s http://mentalfitnesslounge.com)"
     ]
   }
 }
