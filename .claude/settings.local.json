@@ -26,7 +26,10 @@
       "Bash(mkdir -p images)",
       "Bash(osascript -e 'tell application \"System Events\" to write \\(the clipboard as «class PNGf»\\) to \\(open for access \\(POSIX file \"/Users/zack/Downloads/MFP V1/images/coach.png\"\\) with write permission\\)')",
       "Bash(echo \"mentalfitnesslounge.com\")",
-      "Bash(~/bin/gh api *)"
+      "Bash(~/bin/gh api *)",
+      "Bash(dig +short mentalfitnesslounge.com A)",
+      "Bash(dig +short www.mentalfitnesslounge.com CNAME)",
+      "Bash(python3)"
     ]
   }
 }
