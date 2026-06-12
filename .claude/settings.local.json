@@ -22,7 +22,11 @@
       "Bash(~/bin/gh auth *)",
       "Bash(~/bin/gh repo *)",
       "Bash(xargs sed -i '' 's/Mindful Path/Mental Fitness Lounge/g')",
-      "Bash(git push *)"
+      "Bash(git push *)",
+      "Bash(mkdir -p images)",
+      "Bash(osascript -e 'tell application \"System Events\" to write \\(the clipboard as «class PNGf»\\) to \\(open for access \\(POSIX file \"/Users/zack/Downloads/MFP V1/images/coach.png\"\\) with write permission\\)')",
+      "Bash(echo \"mentalfitnesslounge.com\")",
+      "Bash(~/bin/gh api *)"
     ]
   }
 }
