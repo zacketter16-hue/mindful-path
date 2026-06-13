@@ -139,16 +139,35 @@ nav a:hover { color: var(--primary); }
   gap: 1.5rem;
 }
 
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 .widget-card {
   background: var(--card-bg);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 1.8rem;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
   border-top: 4px solid var(--primary);
   position: relative;
+  animation: float 6s ease-in-out infinite;
 }
+
+.widget-grid .widget-card:nth-child(1) { animation-delay: 0s; }
+.widget-grid .widget-card:nth-child(2) { animation-delay: -0.5s; }
+.widget-grid .widget-card:nth-child(3) { animation-delay: -1s; }
+.widget-grid .widget-card:nth-child(4) { animation-delay: -1.5s; }
+.widget-grid .widget-card:nth-child(5) { animation-delay: -2s; }
+.widget-grid .widget-card:nth-child(6) { animation-delay: -2.5s; }
+.widget-grid .widget-card:nth-child(7) { animation-delay: -3s; }
+.widget-grid .widget-card:nth-child(8) { animation-delay: -3.5s; }
+.widget-grid .widget-card:nth-child(9) { animation-delay: -4s; }
+.widget-grid .widget-card:nth-child(10) { animation-delay: -4.5s; }
+.widget-grid .widget-card:nth-child(11) { animation-delay: -5s; }
+.widget-grid .widget-card:nth-child(12) { animation-delay: -5.5s; }
 
 .widget-card::after {
   content: "→";
@@ -161,8 +180,10 @@ nav a:hover { color: var(--primary); }
 }
 
 .widget-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+  animation-play-state: paused;
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+  z-index: 2;
 }
 
 .widget-card .icon {
