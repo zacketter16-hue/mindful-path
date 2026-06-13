@@ -8,6 +8,7 @@
 <!-- Memberstack webflow package -->
 <script data-memberstack-app="app_cmqcun2ge00xf0ttp8idkagxl" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
 <script src="js/gate.js"></script>
+<script src="js/nav-auth.js"></script>
 </head>
 <body>
 
@@ -36,8 +37,9 @@
         <li><a href="blog.html">Blog</a></li>
         <li><a href="videos.html">Weekly Videos</a></li>
         <li><a href="schedule.html" class="btn">Book a Session</a></li>
-        <li><a href="#" data-ms-modal="LOGIN">Log In</a></li>
-        <li><a href="#" data-ms-modal="SIGNUP" data-ms-plan:add="prc_mfl-access-4exi0pl0" class="btn">Join</a></li>
+        <li id="nav-login"><a href="#" data-ms-modal="LOGIN">Log In</a></li>
+        <li id="nav-join"><a href="#" data-ms-modal="SIGNUP" data-ms-plan:add="prc_mfl-access-4exi0pl0" class="btn">Join</a></li>
+        <li id="nav-logout" style="display:none;"><a href="#">Log Out</a></li>
       </ul>
     </nav>
   </div>
