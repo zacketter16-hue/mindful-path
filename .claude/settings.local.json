@@ -34,7 +34,8 @@
       "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" https://mentalfitnesslounge.com)",
       "Bash(curl -s http://mentalfitnesslounge.com)",
       "Bash(git pull *)",
-      "Bash(git stash *)"
+      "Bash(git stash *)",
+      "Bash(curl -s https://mentalfitnesslounge.com/css/style.css)"
     ]
   }
 }
