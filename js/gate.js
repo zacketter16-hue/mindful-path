@@ -4,17 +4,12 @@
       .getCurrentMember()
       .then(function (res) {
         if (!res || !res.data) {
-          try {
-            window.$memberstackDom.openModal("LOGIN").then(function (res2) {
-              if (!res2 || !res2.data) {
-                window.location.href = "/index.html";
-              }
-            }).catch(function () {
-              window.location.href = "/index.html";
-            });
-          } catch (e) {
-            window.location.href = "/index.html";
-          }
+          var link = document.createElement("a");
+          link.href = "#";
+          link.setAttribute("data-ms-modal", "LOGIN");
+          link.style.display = "none";
+          document.body.appendChild(link);
+          link.click();
         }
       })
       .catch(function () {
