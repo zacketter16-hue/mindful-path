@@ -35,7 +35,7 @@
         <li><a href="blog.html">Blog</a></li>
         <li><a href="videos.html">Weekly Videos</a></li>
         <li><a href="schedule.html" class="btn">Book a Session</a></li>
-        <li><a href="#" data-ms-modal="LOGIN">Log In</a></li>
+        <li><a href="#" data-ms-modal="LOGIN" id="login-link">Log In</a></li>
         <li><a href="#" data-ms-modal="SIGNUP" data-ms-plan:add="prc_mfl-access-4exi0pl0" class="btn">Join</a></li>
       </ul>
     </nav>
@@ -184,5 +184,13 @@
   <p style="margin-top:0.5rem;">If you are in crisis, call or text 988 (Suicide & Crisis Lifeline).</p>
 </footer>
 
+<script>
+  if (window.location.search.indexOf("login=1") !== -1) {
+    setTimeout(function () {
+      var link = document.getElementById("login-link");
+      if (link) link.click();
+    }, 1500);
+  }
+</script>
 </body>
 </html>
