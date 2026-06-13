@@ -173,6 +173,17 @@
   <div style="margin-top:1.5rem;"><a class="btn" href="videos.html">Watch More</a></div>
 </section>
 
+<section class="section" id="auth-section" style="max-width:420px; margin:0 auto;">
+  <h2 style="text-align:center;">Member Login / Sign Up</h2>
+  <p id="auth-message" style="text-align:center; color:var(--muted);"></p>
+  <form id="auth-form" style="display:flex; flex-direction:column; gap:0.8rem;">
+    <input type="email" id="auth-email" placeholder="Email" required style="padding:0.7rem; border:1px solid #ccc; border-radius:8px;">
+    <input type="password" id="auth-password" placeholder="Password" required style="padding:0.7rem; border:1px solid #ccc; border-radius:8px;">
+    <button type="submit" id="auth-login-btn" class="btn">Log In</button>
+    <button type="button" id="auth-signup-btn" class="btn" style="background:transparent; color:var(--primary); border:1px solid var(--primary);">Sign Up</button>
+  </form>
+</section>
+
 <section class="section" style="text-align:center;">
   <h2>Want More Personalized Support?</h2>
   <p>Book a one-on-one session for guidance tailored to your situation.</p>
@@ -185,12 +196,57 @@
 </footer>
 
 <script>
+  var authMsg = document.getElementById("auth-message");
+  var redirectAfterLogin = sessionStorage.getItem("mfl-redirect") || null;
+
   if (window.location.search.indexOf("login=1") !== -1) {
-    setTimeout(function () {
-      var link = document.getElementById("login-link");
-      if (link) link.click();
-    }, 1500);
+    authMsg.textContent = "Please log in or sign up to access this content.";
+    document.getElementById("auth-section").scrollIntoView();
   }
+
+  document.getElementById("auth-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var email = document.getElementById("auth-email").value;
+    var password = document.getElementById("auth-password").value;
+    authMsg.textContent = "Logging in...";
+    window.$memberstackDom.loginMemberEmailPassword({ email: email, password: password })
+      .then(function () {
+        if (redirectAfterLogin) {
+          sessionStorage.removeItem("mfl-redirect");
+          window.location.href = redirectAfterLogin;
+        } else {
+          authMsg.textContent = "Logged in!";
+        }
+      })
+      .catch(function (err) {
+        authMsg.textContent = "Login failed: " + (err && err.message ? err.message : "check your email/password.");
+      });
+  });
+
+  document.getElementById("auth-signup-btn").addEventListener("click", function () {
+    var email = document.getElementById("auth-email").value;
+    var password = document.getElementById("auth-password").value;
+    if (!email || !password) {
+      authMsg.textContent = "Enter an email and password, then click Sign Up.";
+      return;
+    }
+    authMsg.textContent = "Signing up...";
+    window.$memberstackDom.signupMemberEmailPassword({
+      email: email,
+      password: password
+    })
+      .then(function () {
+        if (redirectAfterLogin) {
+          sessionStorage.removeItem("mfl-redirect");
+          window.location.href = redirectAfterLogin;
+        } else {
+          authMsg.textContent = "Account created!";
+        }
+      })
+      .catch(function (err) {
+        authMsg.textContent = "Sign up failed: " + (err && err.message ? err.message : "try again.");
+      });
+  });
 </script>
 </body>
 </html>
