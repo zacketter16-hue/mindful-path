@@ -37,7 +37,8 @@
       "Bash(git stash *)",
       "Bash(curl -s https://mentalfitnesslounge.com/css/style.css)",
       "Bash(find /private/tmp/claude-501 -newer /tmp -name \"*.png\" -mmin -10 2>/dev/null; find ~/Downloads -maxdepth 1 -newer /tmp -mmin -10 2>/dev/null)",
-      "Bash(cp \"/Users/zack/Downloads/Know-Your-Why-shutterstock_2066411765.png\" \"/Users/zack/Downloads/MFP V1/images/know-your-why-thumb.png\")"
+      "Bash(cp \"/Users/zack/Downloads/Know-Your-Why-shutterstock_2066411765.png\" \"/Users/zack/Downloads/MFP V1/images/know-your-why-thumb.png\")",
+      "Bash(curl -s https://mentalfitnesslounge.com/videos.html)"
     ]
   }
 }
