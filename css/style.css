@@ -238,6 +238,26 @@ nav a:hover { color: var(--primary); }
   overflow: hidden;
 }
 
+.video-placeholder {
+  margin-top: 0.6rem;
+  height: 160px;
+  border: 2px dashed var(--accent);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-weight: 700;
+  background: var(--bg);
+}
+
+.module-upsell {
+  text-align: center;
+  border-top: 2px solid var(--bg);
+  padding-top: 1.2rem;
+  margin-top: 0.5rem;
+}
+
 .card .thumb {
   background: var(--accent);
   height: 140px;
