@@ -148,12 +148,12 @@ nav a:hover { color: var(--primary); }
 .coach-banner {
   max-width: 1100px;
   margin: 2rem auto 0;
-  padding: 1.5rem;
+  padding: 1.5rem 2rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.5rem;
   background: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
@@ -162,7 +162,6 @@ nav a:hover { color: var(--primary); }
 .coach-banner-top {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 1.2rem;
   flex-wrap: wrap;
 }
@@ -627,6 +626,7 @@ footer a { text-decoration: underline; }
   .dropdown-menu li a {
     padding: 0.6rem 0;
   }
+  .coach-banner { flex-direction: column; justify-content: center; }
   .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
   .coach-banner-photo { width: 70px; height: 70px; }
   .coach-banner-text { font-size: 1rem; }
