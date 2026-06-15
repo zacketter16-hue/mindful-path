@@ -160,6 +160,11 @@ nav a:hover { color: var(--primary); }
   flex-shrink: 0;
 }
 
+.coach-banner-text {
+  color: var(--primary-dark);
+  font-size: 1.1rem;
+}
+
 .coach-banner-logos {
   display: flex;
   align-items: center;
