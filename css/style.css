@@ -520,6 +520,10 @@ footer {
 
 footer a { text-decoration: underline; }
 
+.nav-close {
+  display: none;
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -538,7 +542,27 @@ footer a { text-decoration: underline; }
     width: 100%;
     order: 3;
   }
-  header nav.open { display: block; }
+  header nav.open {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 200;
+    overflow-y: auto;
+    padding-top: 1.2rem;
+  }
+  header nav.open .nav-close {
+    display: block;
+    margin: 0 1.5rem 0.5rem auto;
+    background: none;
+    border: none;
+    font-size: 1.6rem;
+    color: var(--primary-dark);
+    cursor: pointer;
+  }
   nav ul {
     flex-direction: column;
     align-items: stretch;
@@ -549,22 +573,26 @@ footer a { text-decoration: underline; }
   nav ul > li {
     width: 100%;
     border-bottom: 1px solid var(--bg);
-    padding: 0.8rem 0;
+    padding: 1rem 1.5rem;
   }
   nav ul > li:last-child { border-bottom: none; }
   nav ul > li > a {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
   }
   nav ul > li > a.btn {
     text-align: center;
+    justify-content: center;
   }
   .dropdown-menu {
     position: static;
     box-shadow: none;
-    padding: 0.5rem 0 0 1rem;
+    padding: 0.8rem 0 0 1rem;
   }
   .dropdown-menu li a {
-    padding: 0.5rem 0;
+    padding: 0.6rem 0;
   }
   .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
   .coach-banner-photo { width: 70px; height: 70px; }
