@@ -628,6 +628,7 @@ footer a { text-decoration: underline; }
   }
   .coach-banner { flex-direction: column; justify-content: center; }
   .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
+  .coach-banner-logos img { height: 60px; }
   .coach-banner-photo { width: 70px; height: 70px; }
   .coach-banner-text { font-size: 1rem; }
 }
