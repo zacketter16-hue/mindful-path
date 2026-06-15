@@ -111,7 +111,7 @@ nav a:hover { color: var(--primary); }
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: 7rem 1.5rem 6rem;
+  padding: 3rem 1.5rem;
   position: relative;
   background:
     linear-gradient(rgba(26,15,15,0.72), rgba(58,15,15,0.78)),
@@ -134,6 +134,42 @@ nav a:hover { color: var(--primary); }
 .hero p {
   color: rgba(255,255,255,0.9);
   font-size: 1.15rem;
+}
+
+/* ---------- Coach Banner ---------- */
+.coach-banner {
+  max-width: 1100px;
+  margin: 2rem auto 0;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.coach-banner-photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary);
+  flex-shrink: 0;
+}
+
+.coach-banner-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.coach-banner-logos img {
+  height: 60px;
+  width: auto;
 }
 
 /* ---------- Widget Grid ---------- */
