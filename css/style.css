@@ -119,10 +119,13 @@ nav a:hover { color: var(--primary); }
 /* ---------- Hero ---------- */
 .hero {
   text-align: center;
-  padding: 1.5rem 1.5rem;
+  padding: 3rem 1.5rem;
   position: relative;
-  background: linear-gradient(180deg, #f7eeee 0%, var(--bg) 100%);
-  color: var(--text);
+  background:
+    linear-gradient(135deg, rgba(58,15,15,0.75), rgba(92,26,26,0.65)),
+    url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80')
+      center/cover no-repeat;
+  color: #fff;
 }
 
 .hero-inner {
@@ -131,7 +134,7 @@ nav a:hover { color: var(--primary); }
 }
 
 .hero-logo {
-  max-width: 420px;
+  max-width: 800px;
   width: 100%;
   margin: 0 auto 0.5rem;
   display: block;
