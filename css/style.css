@@ -43,6 +43,14 @@ header {
   font-size: 1.4rem;
   font-weight: 700;
   color: var(--primary-dark);
+  display: flex;
+  align-items: center;
+}
+
+.logo-img {
+  height: 44px;
+  width: auto;
+  display: block;
 }
 
 nav ul {
@@ -542,6 +550,7 @@ footer a { text-decoration: underline; }
   .nav-container { flex-wrap: wrap; justify-content: space-between; }
   .nav-toggle { display: block; order: 1; }
   .logo { order: 2; font-size: 1.2rem; }
+  .logo-img { height: 34px; }
   .nav-auth-mobile {
     display: flex;
     order: 3;

@@ -40,7 +40,8 @@
       "Bash(cp \"/Users/zack/Downloads/Know-Your-Why-shutterstock_2066411765.png\" \"/Users/zack/Downloads/MFP V1/images/know-your-why-thumb.png\")",
       "Bash(curl -s https://mentalfitnesslounge.com/videos.html)",
       "Bash(find /Users/zack/.claude -newer \"/Users/zack/Downloads/MFP V1/videos.html\" -iname \"*.png\" 2>/dev/null | head -5)",
-      "Bash(python3 -)"
+      "Bash(python3 -)",
+      "Bash(find /Users/zack/Downloads -maxdepth 2 -iname \"*.png\" -newer \"/Users/zack/Downloads/MFP V1/images/logo.svg\" 2>/dev/null; find /tmp /var/folders -maxdepth 4 -iname \"*paste*\" -newer \"/Users/zack/Downloads/MFP V1/images/logo.svg\" 2>/dev/null | head -20)"
     ]
   }
 }
