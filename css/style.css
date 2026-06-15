@@ -121,7 +121,7 @@ nav a:hover { color: var(--primary); }
   text-align: center;
   padding: 1.5rem 1.5rem;
   position: relative;
-  background: var(--bg);
+  background: linear-gradient(180deg, #f7eeee 0%, var(--bg) 100%);
   color: var(--text);
 }
 
@@ -131,7 +131,7 @@ nav a:hover { color: var(--primary); }
 }
 
 .hero-logo {
-  max-width: 800px;
+  max-width: 420px;
   width: 100%;
   margin: 0 auto 0.5rem;
   display: block;
