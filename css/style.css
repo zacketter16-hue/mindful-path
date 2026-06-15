@@ -551,4 +551,7 @@ footer a { text-decoration: underline; }
     box-shadow: none;
     padding-left: 1rem;
   }
+  .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
+  .coach-banner-photo { width: 70px; height: 70px; }
+  .coach-banner-text { font-size: 1rem; }
 }
