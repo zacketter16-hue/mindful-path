@@ -524,6 +524,10 @@ footer a { text-decoration: underline; }
   display: none;
 }
 
+.nav-auth-mobile {
+  display: none;
+}
+
 .nav-toggle {
   display: none;
   background: none;
@@ -536,7 +540,23 @@ footer a { text-decoration: underline; }
 
 @media (max-width: 768px) {
   .nav-container { flex-wrap: wrap; justify-content: space-between; }
-  .nav-toggle { display: block; }
+  .nav-toggle { display: block; order: 1; }
+  .logo { order: 2; font-size: 1.2rem; }
+  .nav-auth-mobile {
+    display: flex;
+    order: 3;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .nav-auth-mobile .nav-auth-join {
+    padding: 0.4rem 1rem;
+    font-size: 0.85rem;
+  }
+  .nav-auth-mobile .nav-auth-login {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+  }
   header nav {
     display: none;
     width: 100%;
