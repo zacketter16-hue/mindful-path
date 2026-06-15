@@ -42,7 +42,15 @@
       "Bash(find /Users/zack/.claude -newer \"/Users/zack/Downloads/MFP V1/videos.html\" -iname \"*.png\" 2>/dev/null | head -5)",
       "Bash(python3 -)",
       "Bash(find /Users/zack/Downloads -maxdepth 2 -iname \"*.png\" -newer \"/Users/zack/Downloads/MFP V1/images/logo.svg\" 2>/dev/null; find /tmp /var/folders -maxdepth 4 -iname \"*paste*\" -newer \"/Users/zack/Downloads/MFP V1/images/logo.svg\" 2>/dev/null | head -20)",
-      "Bash(python3 -c \"from PIL import Image; im=Image.open\\('images/landing-logo.png'\\); print\\(im.mode\\)\")"
+      "Bash(python3 -c \"from PIL import Image; im=Image.open\\('images/landing-logo.png'\\); print\\(im.mode\\)\")",
+      "Bash(sips -getProperty pixelWidth -getProperty pixelHeight images/landing-logo.png)",
+      "Bash(sips -g pixelWidth -g pixelHeight images/landing-logo.png)",
+      "Bash(sips -c 500 1100 images/landing-logo-cropped.png)",
+      "Bash(sips -p 600 1100 images/landing-logo-cropped.png)",
+      "Bash(rm -f images/landing-logo-cropped.png)",
+      "Bash(python3 -c ' *)",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"from PIL import Image; print\\('ok'\\)\")"
     ]
   }
 }
