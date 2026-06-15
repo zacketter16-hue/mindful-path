@@ -541,15 +541,30 @@ footer a { text-decoration: underline; }
   header nav.open { display: block; }
   nav ul {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
+    align-items: stretch;
+    gap: 0;
     width: 100%;
-    padding: 1rem 0;
+    padding: 0.5rem 0 1rem;
+  }
+  nav ul > li {
+    width: 100%;
+    border-bottom: 1px solid var(--bg);
+    padding: 0.8rem 0;
+  }
+  nav ul > li:last-child { border-bottom: none; }
+  nav ul > li > a {
+    display: block;
+  }
+  nav ul > li > a.btn {
+    text-align: center;
   }
   .dropdown-menu {
     position: static;
     box-shadow: none;
-    padding-left: 1rem;
+    padding: 0.5rem 0 0 1rem;
+  }
+  .dropdown-menu li a {
+    padding: 0.5rem 0;
   }
   .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
   .coach-banner-photo { width: 70px; height: 70px; }
