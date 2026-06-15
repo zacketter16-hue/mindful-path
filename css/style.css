@@ -142,13 +142,21 @@ nav a:hover { color: var(--primary); }
   margin: 2rem auto 0;
   padding: 1.5rem;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 1.5rem;
+  gap: 1.2rem;
   background: #fff;
   border-radius: var(--radius);
   box-shadow: var(--shadow);
+}
+
+.coach-banner-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
 }
 
 .coach-banner-photo {
