@@ -134,7 +134,7 @@ nav a:hover { color: var(--primary); }
 }
 
 .hero-logo {
-  max-width: 320px;
+  max-width: 900px;
   width: 100%;
   margin: 0 auto 0.5rem;
   display: block;
