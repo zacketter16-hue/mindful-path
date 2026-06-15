@@ -122,7 +122,9 @@ nav a:hover { color: var(--primary); }
   padding: 1.5rem 1.5rem;
   position: relative;
   background:
-    linear-gradient(135deg, var(--primary-dark), var(--primary));
+    linear-gradient(135deg, rgba(58,15,15,0.75), rgba(92,26,26,0.6)),
+    url('https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=1600&q=80')
+      center/cover no-repeat;
   color: #fff;
 }
 
