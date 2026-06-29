@@ -3,11 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Blog | The Mental Fitness Lounge</title>
+<title>Community | The Mental Fitness Lounge</title>
 <link rel="stylesheet" href="css/style.css">
 <!-- Memberstack webflow package -->
 <script data-memberstack-app="app_cmqcun2ge00xf0ttp8idkagxl" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
-<script src="js/gate.js"></script>
 <script src="js/nav-auth.js"></script>
 <script src="js/nav-toggle.js"></script>
 </head>
@@ -30,13 +29,13 @@
             <li><a href="topics/anxiety.html">Anxiety</a></li>
             <li><a href="topics/depression.html">Depression</a></li>
             <li><a href="topics/adhd.html">ADHD</a></li>
-            <li><a href="topics/breakup.html">Breakups & Relationships</a></li>
+            <li><a href="topics/breakup.html">Relationships &amp; Breakups</a></li>
             <li><a href="topics/job-loss.html">Getting Fired / Job Loss</a></li>
-            <li><a href="topics/grief.html">Grief & Loss</a></li>
+            <li><a href="topics/grief.html">Grief &amp; Loss</a></li>
             <li><a href="topics/injury-illness.html">Burnout</a></li>
-            <li><a href="topics/sexuality.html">Identity & Sexuality</a></li>
+            <li><a href="topics/sexuality.html">Identity &amp; Sexuality</a></li>
             <li><a href="topics/addiction.html">Addiction</a></li>
-            <li><a href="topics/adjustment.html">Adjustment</a></li>
+            <li><a href="topics/adjustment.html">Low Motivation</a></li>
             <li><a href="topics/goal-setting.html">Goal Setting</a></li>
             <li><a href="topics/self-esteem.html">Confidence</a></li>
           </ul>
@@ -54,20 +53,30 @@
 </header>
 
 <section class="topic-hero">
-  <h1>The Blog</h1>
-  <p>Fresh articles on mental health, coping strategies, and everyday life.</p>
+  <h1>Community</h1>
+  <p>Ask questions, share what's on your mind, and get responses from Zack — anonymously, no judgment.</p>
 </section>
 
-<section class="section">
-  <div class="card-row">
-    <a class="card" href="https://www.psychologytoday.com/us/essentials" target="_blank" rel="noopener" style="display:block;">
-      <div class="thumb" style="background-image:url('images/psychology-today-thumb.svg'); background-size:cover; background-position:center;"></div>
-      <div class="card-body">
-        <h4>Psychology Today Articles</h4>
-        <p>Peer reviewed articles from professionals in the field.</p>
-      </div>
-    </a>
-  </div>
+<section class="section" style="max-width: 860px; margin: 0 auto;">
+  <h2>Ask Anything</h2>
+  <p style="color: var(--muted); margin-bottom: 2rem;">Post a question or thought anonymously. Zack reviews and responds to posts regularly with written replies and video responses.</p>
+
+  <!-- Hyvor Talk embed — replace YOUR-WEBSITE-ID with your ID from hyvor.com/console -->
+  <div id="hyvor-talk-view"></div>
+  <script type="text/javascript">
+    var HYVOR_TALK_WEBSITE = "YOUR-WEBSITE-ID";
+    var HYVOR_TALK_CONFIG = {
+      url: false,
+      id: "community-board"
+    };
+  </script>
+  <script async type="text/javascript" src="https://talk.hyvor.com/web-api/embed.js"></script>
+</section>
+
+<section class="section" style="text-align:center;">
+  <h2>Want More Personalized Support?</h2>
+  <p>Book a one-on-one session for guidance tailored specifically to your situation.</p>
+  <div style="margin-top:1.5rem;"><a class="btn" href="schedule.html">Book a Session</a></div>
 </section>
 
 <footer>
