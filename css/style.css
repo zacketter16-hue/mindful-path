@@ -406,6 +406,9 @@ nav a:hover { color: var(--primary); }
 
 .module-body { padding: 0 1.5rem 1.2rem 1.5rem; }
 .module-body p { font-size: 0.88rem; color: var(--muted); }
+.module-body ol, .module-body ul { font-size: 0.88rem; color: var(--muted); padding-left: 1.3rem; margin: 0.6rem 0; }
+.module-body li { margin-bottom: 0.5rem; }
+.module-body li:last-child { margin-bottom: 0; }
 .module-info h4 { color: var(--primary-dark); }
 .module-info p { font-size: 0.88rem; color: var(--muted); }
 
