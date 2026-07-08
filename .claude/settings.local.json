@@ -52,7 +52,9 @@
       "Bash(pip3 install *)",
       "Bash(python3 -c \"from PIL import Image; print\\('ok'\\)\")",
       "Bash(curl -s -o a.jpg \"https://images.unsplash.com/photo-1559825481-12a05cc00344?auto=format&fit=crop&w=800&q=60\")",
-      "Bash(curl -s -o b.jpg \"https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=800&q=60\")"
+      "Bash(curl -s -o b.jpg \"https://images.unsplash.com/photo-1604871000636-074fa5117945?auto=format&fit=crop&w=800&q=60\")",
+      "Read(//Users/zack/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/f398e7d6-5a7f-432a-b09e-2549d2bf0a5a/07da9012-1f10-4273-888e-49596777e587/skills/docx/**)",
+      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/course-materials/depression/Depression Treatment.docx\" /tmp/depression-treatment-unpacked/)"
     ]
   }
 }
