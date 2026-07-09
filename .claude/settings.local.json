@@ -56,7 +56,8 @@
       "Read(//Users/zack/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/f398e7d6-5a7f-432a-b09e-2549d2bf0a5a/07da9012-1f10-4273-888e-49596777e587/skills/docx/**)",
       "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/course-materials/depression/Depression Treatment.docx\" /tmp/depression-treatment-unpacked/)",
       "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Treatment for ADHD.docx\" /tmp/adhd-treatment-unpacked/)",
-      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Healthy Relationships.docx\" /tmp/healthy-relationships-unpacked/)"
+      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Healthy Relationships.docx\" /tmp/healthy-relationships-unpacked/)",
+      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Attachment.docx\" /tmp/attachment-unpacked/)"
     ]
   }
 }
