@@ -406,7 +406,9 @@ nav a:hover { color: var(--primary); }
 
 .module-body { padding: 0 1.5rem 1.2rem 1.5rem; }
 .module-subtitle { margin-top: 1.4rem !important; }
-.module-subtitle strong { font-size: 0.95rem; color: #222; }
+.module-subtitle strong { font-size: 0.95rem; color: var(--primary); }
+.module-subheader { margin-top: 0.9rem !important; }
+.module-subheader strong { font-size: 0.88rem; color: #111; }
 .module-body p { font-size: 0.88rem; color: var(--muted); }
 .module-body ol, .module-body ul { font-size: 0.88rem; color: var(--muted); padding-left: 1.3rem; margin: 0.6rem 0; }
 .module-body li { margin-bottom: 0.5rem; }
