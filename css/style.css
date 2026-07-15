@@ -416,6 +416,8 @@ nav a:hover { color: var(--primary); }
 .module-body li:last-child { margin-bottom: 0; }
 .module-body a { color: var(--primary); text-decoration: underline; }
 .module-body a:hover { color: var(--primary-dark); }
+.module-body a.btn { color: #fff; text-decoration: none; }
+.module-body a.btn:hover { color: #fff; }
 .module-info h4 { color: var(--primary-dark); }
 .module-info p { font-size: 0.88rem; color: var(--muted); }
 
