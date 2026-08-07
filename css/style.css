@@ -421,6 +421,19 @@ nav a:hover { color: var(--primary); }
 .module-info h4 { color: var(--primary-dark); }
 .module-info p { font-size: 0.88rem; color: var(--muted); }
 
+.module-quote {
+  background: var(--bg);
+  border-left: 4px solid var(--primary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 0.9rem 1.3rem;
+  margin-top: 1.3rem !important;
+}
+.module-quote p {
+  font-style: italic;
+  color: var(--text) !important;
+  margin-bottom: 0 !important;
+}
+
 .tag-row { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
 .tag {
   background: var(--bg);
