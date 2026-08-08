@@ -614,6 +614,17 @@ form input, form select, form textarea {
   .coach { grid-template-columns: 1fr; text-align: center; }
 }
 
+/* ---------- Community graphic (mobile enlarge) ---------- */
+@media (max-width: 768px) {
+  .community-join {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  .community-graphic {
+    max-width: 100% !important;
+  }
+}
+
 /* ---------- Footer ---------- */
 footer {
   background: var(--primary-dark);
