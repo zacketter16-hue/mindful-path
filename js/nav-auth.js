@@ -1,4 +1,29 @@
 (function () {
+  // Remember which page the user was on when they clicked Log In / Join,
+  // so the auth handler on index.html can send them back there afterward.
+  function rememberRedirectOnAuthClick() {
+    var path = window.location.pathname;
+    // Don't override a target already set by the gate, and don't bother
+    // recording the home page itself as a destination.
+    if (/index\.html$/.test(path) || path === "/" || path === "") return;
+    var selectors = [
+      ".nav-auth-login",
+      ".nav-auth-join",
+      "#nav-login a",
+      "#nav-join a"
+    ];
+    document.querySelectorAll(selectors.join(",")).forEach(function (link) {
+      link.addEventListener("click", function () {
+        sessionStorage.setItem("mfl-redirect", path + window.location.search);
+      });
+    });
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", rememberRedirectOnAuthClick);
+  } else {
+    rememberRedirectOnAuthClick();
+  }
+
   function update(attempts) {
     if (!window.$memberstackDom) {
       if (attempts < 50) setTimeout(function () { update(attempts + 1); }, 100);
