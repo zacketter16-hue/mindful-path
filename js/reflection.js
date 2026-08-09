@@ -84,7 +84,12 @@
               { onConflict: "member_id,playbook,module_num,question_index" }
             )
             .then(function (result) {
-              if (status) status.textContent = result.error ? "Couldn't save — try again" : "Saved";
+              if (result.error) {
+                console.error("reflection save error:", result.error);
+                if (status) status.textContent = "Error: " + result.error.message;
+              } else if (status) {
+                status.textContent = "Saved";
+              }
             });
         }, 800);
 
