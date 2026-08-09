@@ -10,6 +10,8 @@
 <script src="../js/gate.js"></script>
 <script src="../js/nav-auth.js"></script>
 <script src="../js/nav-toggle.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="../js/reflection.js"></script>
 </head>
 <body>
 
@@ -191,11 +193,23 @@
         <p class="module-subheader"><strong>One Thing to Remember</strong></p>
         <p><strong>Anxiety isn't your enemy—it's your mind and body's attempt to protect you from perceived future threats.</strong></p>
         <p class="module-subheader"><strong>Reflect</strong></p>
-        <ul>
-          <li>When do you notice anxiety showing up most often in your life?</li>
-          <li>How has your view of anxiety changed after learning that it is a normal survival mechanism?</li>
-          <li>Are there situations where your anxiety has actually helped you prepare or perform better?</li>
-        </ul>
+        <div class="reflect-list">
+          <div class="reflect-item">
+            <p class="reflect-question">When do you notice anxiety showing up most often in your life?</p>
+            <textarea class="reflect-answer" rows="3" placeholder="Write your answer here..."></textarea>
+            <span class="reflect-status"></span>
+          </div>
+          <div class="reflect-item">
+            <p class="reflect-question">How has your view of anxiety changed after learning that it is a normal survival mechanism?</p>
+            <textarea class="reflect-answer" rows="3" placeholder="Write your answer here..."></textarea>
+            <span class="reflect-status"></span>
+          </div>
+          <div class="reflect-item">
+            <p class="reflect-question">Are there situations where your anxiety has actually helped you prepare or perform better?</p>
+            <textarea class="reflect-answer" rows="3" placeholder="Write your answer here..."></textarea>
+            <span class="reflect-status"></span>
+          </div>
+        </div>
         <p class="module-subheader"><strong>Put It Into Practice</strong></p>
         <p>Over the next week, each time you notice yourself feeling anxious, pause and ask yourself:</p>
         <p><strong>"What is my anxiety trying to protect me from right now?"</strong></p>
