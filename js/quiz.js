@@ -148,7 +148,7 @@
 
   var INCLUDED = [
     "<strong>All 12 Playbooks</strong> — self-paced modules you can work through anytime, not just the one above",
-    "<strong>Live Events</strong> — monthly workshops and Q&amp;A with Zack, plus replays if you miss one",
+    "<strong>Live Events</strong> — monthly calendar with live workshops, Q&amp;A and guests. Plus replays if you miss one",
     "<strong>Private Member Community</strong> — a members-only group to share wins and ask questions",
     "<strong>Weekly Challenges &amp; Prompts</strong> — reflection prompts, discussion threads, and Q&amp;A throughout the week",
     "<strong>A Say in What's Next</strong> — members vote on upcoming Live Event topics"
