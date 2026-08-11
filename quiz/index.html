@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Find Your Personalized Plan | The Mental Fitness Lounge</title>
+<link rel="stylesheet" href="../css/style.css">
+<!-- Memberstack webflow package -->
+<script data-memberstack-app="app_cmqcun2ge00xf0ttp8idkagxl" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+</head>
+<body>
+
+<header class="quiz-header">
+  <a href="/index.html" class="logo"><img src="../images/logo.png" alt="The Mental Fitness Lounge" class="logo-img"></a>
+</header>
+
+<section class="topic-hero">
+  <h1>What's Your Starting Point?</h1>
+  <p>Answer 7 quick questions and get a personalized plan built around what you're actually dealing with. Free, and it takes about a minute.</p>
+</section>
+
+<section class="quiz-wrap">
+  <p id="quiz-progress" class="quiz-progress"></p>
+  <div id="quiz-step"></div>
+
+  <div id="quiz-email-step" style="display:none;">
+    <h2 class="quiz-q">Your plan is ready.</h2>
+    <p class="quiz-email-sub">Enter your email and we'll show you your personalized starting point.</p>
+    <form id="quiz-email-form" class="quiz-email-form">
+      <input type="email" id="quiz-email" placeholder="you@example.com" required>
+      <button type="submit" id="quiz-email-btn" class="btn">Show My Plan</button>
+    </form>
+    <p id="quiz-email-msg" class="quiz-email-msg"></p>
+    <p class="quiz-email-fine">We'll send occasional mental fitness tips. Unsubscribe anytime.</p>
+  </div>
+
+  <div id="quiz-result-step" style="display:none;"></div>
+</section>
+
+<footer>
+  <p>&copy; 2026 The Mental Fitness Lounge. All resources are for educational purposes and are not a substitute for professional medical advice.</p>
+  <p style="margin-top:0.5rem;">If you are in crisis, call or text 988 (Suicide &amp; Crisis Lifeline).</p>
+</footer>
+
+<script src="../js/quiz.js"></script>
+</body>
+</html>

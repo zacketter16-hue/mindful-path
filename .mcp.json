@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "memberstack": {
+      "command": "npx",
+      "args": [ "mcp-remote", "https://mcp.memberstack.com/mcp" ]
+    }
+  }
+}

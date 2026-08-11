@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="css/style.css">
 <!-- Memberstack webflow package -->
 <script data-memberstack-app="app_cmqcun2ge00xf0ttp8idkagxl" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+<script src="js/paywall-config.js"></script>
+<script src="js/content-gate.js"></script>
 <script src="js/nav-auth.js"></script>
 <script src="js/nav-toggle.js"></script>
 </head>
@@ -63,7 +65,12 @@
 
   <img src="images/september-live-events.png" alt="September Live Events Calendar" style="width:100%; border-radius: var(--radius); box-shadow: var(--shadow); display:block;">
 
-  <div class="event-actions">
+  <div data-gated-prompt style="text-align:center; margin:2rem 0; padding:1.5rem; background:var(--surface, #f6f6f6); border-radius: var(--radius);">
+    <p style="margin-bottom:1rem;">Event details, calendar links, and replays are available to members.</p>
+    <a href="index.html#auth-section" class="btn">Join to Unlock</a>
+  </div>
+
+  <div class="event-actions" data-gated style="display:none;">
     <div class="event-action-row">
       <div class="event-action-info">
         <strong>4 Keys to Improve Confidence</strong>
@@ -107,7 +114,7 @@
   </div>
 </section>
 
-<section class="section" style="max-width: 860px; margin: 0 auto;">
+<section class="section" data-gated style="display:none; max-width: 860px; margin: 0 auto;">
   <h2>Archives</h2>
   <p style="color: var(--muted); margin-bottom: 2rem;">Missed a live event? Recordings of past workshops and sessions are stored here for members to watch anytime.</p>
 

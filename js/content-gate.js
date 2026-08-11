@@ -8,22 +8,22 @@
     });
   }
 
-  function redirectToJoin(reason) {
-    sessionStorage.setItem("mfl-redirect", window.location.pathname);
-    window.location.href = "/index.html?" + reason + "=1";
+  function reveal(member) {
+    var unlocked = hasActivePlan(member);
+    document.querySelectorAll("[data-gated]").forEach(function (el) {
+      el.style.display = unlocked ? "" : "none";
+    });
+    document.querySelectorAll("[data-gated-prompt]").forEach(function (el) {
+      el.style.display = unlocked ? "none" : "";
+    });
   }
 
   function waitForMemberstack(attempts) {
     if (window.$memberstackDom) {
       window.$memberstackDom.getCurrentMember().then(function (res) {
-        var member = res && res.data;
-        if (!member) {
-          redirectToJoin("login");
-        } else if (!hasActivePlan(member)) {
-          redirectToJoin("upgrade");
-        }
+        reveal(res && res.data);
       }).catch(function () {
-        redirectToJoin("login");
+        reveal(null);
       });
     } else if (attempts < 50) {
       setTimeout(function () { waitForMemberstack(attempts + 1); }, 100);
