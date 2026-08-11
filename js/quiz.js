@@ -146,17 +146,38 @@
     elEmail.style.display = "";
   }
 
+  var INCLUDED = [
+    "<strong>All 12 Playbooks</strong> — self-paced modules you can work through anytime, not just the one above",
+    "<strong>Live Events</strong> — monthly workshops and Q&amp;A with Zack, plus replays if you miss one",
+    "<strong>Private Member Community</strong> — a members-only group to share wins and ask questions",
+    "<strong>Weekly Challenges &amp; Prompts</strong> — reflection prompts, discussion threads, and Q&amp;A throughout the week",
+    "<strong>A Say in What's Next</strong> — members vote on upcoming Live Event topics"
+  ];
+
   function showResult() {
     var topic = TOPICS[result];
     elEmail.style.display = "none";
     elResult.style.display = "";
+
+    var list = INCLUDED.map(function (item) {
+      return '<li><span class="quiz-check" aria-hidden="true">&#10003;</span><span>' + item + "</span></li>";
+    }).join("");
+
     elResult.innerHTML =
-      '<p class="quiz-result-label">Your personalized starting point</p>' +
-      '<h2 class="quiz-result-title">' + topic.name + "</h2>" +
+      '<p class="quiz-result-label">Your recommended playbook</p>' +
+      '<h2 class="quiz-result-title">' + topic.name + " Playbook</h2>" +
       '<p class="quiz-result-blurb">' + topic.blurb + "</p>" +
-      '<p class="quiz-result-note">Your plan lives inside The Mental Fitness Lounge — along with 11 other playbooks, live events, and the full member library.</p>' +
-      '<a class="btn quiz-result-cta" href="/index.html#auth-section">Start My Free Trial</a>' +
-      '<p class="quiz-result-sub">3 days free. Cancel anytime.</p>';
+      '<p class="quiz-result-disclaimer">This isn\'t a diagnosis — it\'s where we\'d suggest starting based on your answers. You get every playbook either way.</p>' +
+      '<div class="quiz-included">' +
+        "<h3>Your membership includes</h3>" +
+        '<ul class="quiz-included-list">' + list + "</ul>" +
+      "</div>" +
+      '<div class="quiz-cta-block">' +
+        '<a class="btn quiz-result-cta" href="/index.html#auth-section">Start My Free Trial</a>' +
+        '<p class="quiz-result-sub">3 days free, then $24.99/month. Cancel anytime.</p>' +
+      "</div>" +
+      '<p class="quiz-result-trust">Created by Zack Etter, LPC, CMPC — licensed therapist and certified mental performance coach.</p>';
+
     try {
       sessionStorage.setItem("mfl-quiz-topic", result);
     } catch (e) {}
