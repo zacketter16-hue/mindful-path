@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="css/style.css">
 <!-- Memberstack webflow package -->
 <script data-memberstack-app="app_cmqcun2ge00xf0ttp8idkagxl" src="https://static.memberstack.com/scripts/v2/memberstack.js" type="text/javascript"></script>
+<script src="js/paywall-config.js"></script>
 <script src="js/nav-auth.js"></script>
 <script src="js/nav-toggle.js"></script>
 </head>
@@ -218,10 +219,37 @@ personal support, book a one-on-one session.</p>
 <script>
   var authMsg = document.getElementById("auth-message");
   var redirectAfterLogin = sessionStorage.getItem("mfl-redirect") || null;
+  var cfg = window.MFL_PAYWALL || {};
 
-  if (window.location.search.indexOf("login=1") !== -1) {
+  if (window.location.search.indexOf("upgrade=1") !== -1) {
+    authMsg.textContent = "Please log in, then choose a plan to access this content.";
+    document.getElementById("auth-section").scrollIntoView();
+  } else if (window.location.search.indexOf("login=1") !== -1) {
     authMsg.textContent = "Please log in or sign up to access this content.";
     document.getElementById("auth-section").scrollIntoView();
+  }
+
+  function hasActivePlan(member) {
+    var connections = (member && member.planConnections) || [];
+    return connections.some(function (pc) {
+      return pc.planId === cfg.planId && (cfg.activeStatuses || []).indexOf(pc.status) !== -1;
+    });
+  }
+
+  function goToCheckoutOrRedirect(member) {
+    if (hasActivePlan(member)) {
+      sessionStorage.removeItem("mfl-redirect");
+      window.location.href = redirectAfterLogin || (window.location.origin + "/index.html");
+      return;
+    }
+    authMsg.textContent = "Redirecting to checkout...";
+    window.$memberstackDom.purchasePlansWithCheckout({
+      priceId: cfg.priceId,
+      successUrl: window.location.origin + (redirectAfterLogin || "/index.html"),
+      cancelUrl: window.location.href
+    }).catch(function (err) {
+      authMsg.textContent = "Checkout failed: " + (err && err.message ? err.message : "try again.");
+    });
   }
 
   document.getElementById("auth-form").addEventListener("submit", function (e) {
@@ -230,13 +258,8 @@ personal support, book a one-on-one session.</p>
     var password = document.getElementById("auth-password").value;
     authMsg.textContent = "Logging in...";
     window.$memberstackDom.loginMemberEmailPassword({ email: email, password: password })
-      .then(function () {
-        if (redirectAfterLogin) {
-          sessionStorage.removeItem("mfl-redirect");
-          window.location.href = redirectAfterLogin;
-        } else {
-          authMsg.textContent = "Logged in!";
-        }
+      .then(function (res) {
+        goToCheckoutOrRedirect(res && res.data && res.data.member);
       })
       .catch(function (err) {
         authMsg.textContent = "Login failed: " + (err && err.message ? err.message : "check your email/password.");
@@ -255,13 +278,8 @@ personal support, book a one-on-one session.</p>
       email: email,
       password: password
     })
-      .then(function () {
-        if (redirectAfterLogin) {
-          sessionStorage.removeItem("mfl-redirect");
-          window.location.href = redirectAfterLogin;
-        } else {
-          authMsg.textContent = "Account created!";
-        }
+      .then(function (res) {
+        goToCheckoutOrRedirect(res && res.data && res.data.member);
       })
       .catch(function (err) {
         authMsg.textContent = "Sign up failed: " + (err && err.message ? err.message : "try again.");
