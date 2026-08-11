@@ -1,4 +1,8 @@
 (function () {
+  // Kit inline form "Clare form" (uid 870c6ec05f). Public endpoint by design —
+  // no API key belongs in client-side code.
+  var KIT_FORM_ACTION = "https://app.kit.com/forms/9790827/subscriptions";
+
   var TOPICS = {
     anxiety: { name: "Anxiety", url: "/topics/anxiety.html", blurb: "Your answers point to worry, tension, and a mind that struggles to settle. The Anxiety playbook builds the skills to calm your body and quiet the noise." },
     depression: { name: "Depression", url: "/topics/depression.html", blurb: "Your answers point to low mood, low energy, and a loss of interest in things that used to matter. The Depression playbook helps you rebuild momentum step by step." },
@@ -198,16 +202,31 @@
       answers: JSON.stringify(answers.map(function (a) { return a.t; }))
     };
 
-    function done() { showResult(); }
+    // Kit (email marketing) is the list that actually gets emailed; the
+    // Memberstack table is a backup record. Neither is allowed to block the
+    // result — a lead is worth less than a visitor who bounces on an error.
+    var saves = [];
+
+    saves.push(
+      fetch(KIT_FORM_ACTION, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+          email_address: email,
+          "fields[quiz_result]": TOPICS[result].name
+        }).toString()
+      }).catch(function () {})
+    );
 
     if (window.$memberstackDom && window.$memberstackDom.createDataRecord) {
-      window.$memberstackDom
-        .createDataRecord({ table: "quiz_leads", data: payload })
-        .then(done)
-        .catch(function () { done(); });
-    } else {
-      done();
+      saves.push(
+        window.$memberstackDom
+          .createDataRecord({ table: "quiz_leads", data: payload })
+          .catch(function () {})
+      );
     }
+
+    Promise.all(saves).then(showResult, showResult);
   });
 
   renderQuestion();
