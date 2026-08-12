@@ -30,20 +30,44 @@
       return;
     }
     window.$memberstackDom.getCurrentMember().then(function (res) {
-      var member = res && res.data;
-      var loginLi = document.getElementById("nav-login");
-      var joinLi = document.getElementById("nav-join");
-      var logoutLi = document.getElementById("nav-logout");
-      var accountLink = document.getElementById("account-link");
-      var mobileAuth = document.querySelector(".nav-auth-mobile");
-      if (member) {
-        if (loginLi) loginLi.style.display = "none";
-        if (joinLi) joinLi.style.display = "none";
-        if (mobileAuth) mobileAuth.style.display = "none";
-        // Members must be able to update their card or cancel without emailing
-        // us. Opens Stripe's own billing portal.
-        if (accountLink) {
-          accountLink.style.display = "";
+      applyState(res && res.data);
+    });
+
+    // Reflect login/logout without needing a page reload — otherwise someone
+    // who signs up on this page keeps seeing the logged-out nav until they
+    // navigate somewhere else.
+    if (!bound && typeof window.$memberstackDom.onAuthChange === "function") {
+      bound = true;
+      window.$memberstackDom.onAuthChange(function (member) {
+        applyState(member || null);
+      });
+    }
+  }
+
+  // Listeners are attached once, on first render, so repeated auth events
+  // don't stack duplicate handlers.
+  var wiredAccount = false;
+  var wiredLogout = false;
+  var bound = false;
+
+  function applyState(member) {
+    var loginLi = document.getElementById("nav-login");
+    var joinLi = document.getElementById("nav-join");
+    var logoutLi = document.getElementById("nav-logout");
+    var accountLink = document.getElementById("account-link");
+    var mobileAuth = document.querySelector(".nav-auth-mobile");
+
+    if (member) {
+      if (loginLi) loginLi.style.display = "none";
+      if (joinLi) joinLi.style.display = "none";
+      if (mobileAuth) mobileAuth.style.display = "none";
+
+      // Members must be able to update their card or cancel without emailing
+      // us. Opens Stripe's own billing portal.
+      if (accountLink) {
+        accountLink.style.display = "";
+        if (!wiredAccount) {
+          wiredAccount = true;
           accountLink.addEventListener("click", function (e) {
             e.preventDefault();
             window.$memberstackDom
@@ -56,8 +80,12 @@
               });
           });
         }
-        if (logoutLi) {
-          logoutLi.style.display = "";
+      }
+
+      if (logoutLi) {
+        logoutLi.style.display = "";
+        if (!wiredLogout) {
+          wiredLogout = true;
           logoutLi.addEventListener("click", function (e) {
             e.preventDefault();
             window.$memberstackDom.logout().then(function () {
@@ -65,11 +93,15 @@
             });
           });
         }
-      } else {
-        if (logoutLi) logoutLi.style.display = "none";
-        if (accountLink) accountLink.style.display = "none";
       }
-    });
+    } else {
+      if (loginLi) loginLi.style.display = "";
+      if (joinLi) joinLi.style.display = "";
+      if (mobileAuth) mobileAuth.style.display = "";
+      if (logoutLi) logoutLi.style.display = "none";
+      if (accountLink) accountLink.style.display = "none";
+    }
   }
+
   update(0);
 })();
