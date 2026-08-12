@@ -333,6 +333,10 @@ personal support, book a one-on-one session.</p>
   if (quizEmail || window.location.search.indexOf("join=1") !== -1) {
     primaryAction = doSignup;
     document.getElementById("auth-heading").textContent = "Start your free trial";
+    // Without this the password box is ambiguous — people can't tell whether
+    // they are signing in or creating an account.
+    authMsg.textContent =
+      "Choose a password to create your account. Already have one? Log in below.";
     primaryBtn.textContent = "Continue to Payment";
     secondaryBtn.textContent = "I already have an account";
     document.getElementById("auth-reassure").style.display = "";
