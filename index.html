@@ -74,7 +74,7 @@
 </section>
 
 
-<h1 style="text-align:center; font-family:'Brush Script MT', cursive; color:var(--primary); font-size:3rem; margin-top:2.5rem;">What's on Your Mind?</h1>
+<h1 id="playbooks-heading" style="text-align:center; font-family:'Brush Script MT', cursive; color:var(--primary); font-size:3rem; margin-top:2.5rem;">What's on Your Mind?</h1>
 
 <p style="text-align:center; max-width:800px; margin:1rem auto 0; padding:0 1.5rem; color:var(--muted);">Explore self-paced playbooks on the topics that matter most to you. When you're ready for more
 personal support, book a one-on-one session.</p>
@@ -268,7 +268,7 @@ personal support, book a one-on-one session.</p>
     authMsg.textContent = "Redirecting to checkout...";
     window.$memberstackDom.purchasePlansWithCheckout({
       priceId: cfg.priceId,
-      successUrl: window.location.origin + (redirectAfterLogin || "/index.html"),
+      successUrl: window.location.origin + (redirectAfterLogin || "/index.html?welcome=1"),
       cancelUrl: window.location.href
     }).catch(function (err) {
       authMsg.textContent = "Checkout failed: " + (err && err.message ? err.message : "try again.");
@@ -284,6 +284,9 @@ personal support, book a one-on-one session.</p>
 
   function afterAuth(res) {
     var member = res && res.data && res.data.member;
+    // Drop the quiz email now that the account exists, or returning from
+    // checkout would render the signup form again as though nothing happened.
+    try { sessionStorage.removeItem("mfl-quiz-email"); } catch (e) {}
     return persistQuizTopic().then(function () { goToCheckoutOrRedirect(member); });
   }
 
@@ -357,19 +360,48 @@ personal support, book a one-on-one session.</p>
 
   highlightRecommended();
 
-  // Members land here after purchase, so this is where most first syncs happen.
-  if (window.MFLState) {
-    (function waitForMs(n) {
-      if (window.$memberstackDom) {
-        window.$memberstackDom.getCurrentMember().then(function (res) {
-          var m = res && res.data;
-          if (m && hasActivePlan(m)) window.MFLState.syncToKit(m);
-        }).catch(function () {});
-      } else if (n < 50) {
-        setTimeout(function () { waitForMs(n + 1); }, 100);
-      }
-    })(0);
+  // Someone who is already a paying member should never be looking at a
+  // login/signup form — coming back from checkout and seeing it again reads
+  // as "my payment didn't work".
+  function showMemberConfirmation(justPurchased) {
+    var section = document.getElementById("auth-section");
+    if (!section) return;
+    section.innerHTML =
+      '<h2 style="text-align:center;">' +
+      (justPurchased ? "You're in — welcome to the Lounge" : "You're a member") +
+      "</h2>" +
+      '<p style="text-align:center; color:var(--muted);">' +
+      (justPurchased
+        ? "Your membership is active and your free trial has started. Pick a playbook below to begin."
+        : "Your membership is active. Pick a playbook below to keep going.") +
+      "</p>" +
+      '<p style="text-align:center; margin-top:1.2rem;">' +
+      '<a class="btn" href="#playbooks-heading">Browse the Playbooks</a></p>';
   }
+
+  (function onLoadMemberState(n) {
+    if (!window.$memberstackDom) {
+      if (n < 50) setTimeout(function () { onLoadMemberState(n + 1); }, 100);
+      return;
+    }
+    var justPurchased = window.location.search.indexOf("welcome=1") !== -1;
+    window.$memberstackDom.getCurrentMember().then(function (res) {
+      var m = res && res.data;
+      if (!m || !hasActivePlan(m)) return;
+
+      if (window.MFLState) window.MFLState.syncToKit(m);
+      showMemberConfirmation(justPurchased);
+
+      if (justPurchased) {
+        // Land them at the top of the page, and drop the marker so a refresh
+        // doesn't keep congratulating them.
+        try {
+          window.history.replaceState({}, "", window.location.pathname);
+        } catch (e) {}
+        window.scrollTo(0, 0);
+      }
+    }).catch(function () {});
+  })(0);
 </script>
 </body>
 </html>
