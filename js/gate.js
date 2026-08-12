@@ -21,6 +21,8 @@
           redirectToJoin("login");
         } else if (!hasActivePlan(member)) {
           redirectToJoin("upgrade");
+        } else if (window.MFLState) {
+          window.MFLState.syncToKit(member);
         }
       }).catch(function () {
         redirectToJoin("login");

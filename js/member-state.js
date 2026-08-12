@@ -42,5 +42,28 @@ window.MFLState = (function () {
     });
   }
 
-  return { get: get, merge: merge };
+  // Adds a paying member to Kit so a Kit automation can tag them "Member".
+  // Fires once per member — the flag lives in their own member JSON, so it
+  // survives across devices and sessions. Runs on any gated page, which means
+  // existing members get picked up on their next visit rather than only new
+  // signups. Silent on failure: a missed sync must never break page access.
+  function syncToKit(member) {
+    var cfg = window.MFL_PAYWALL || {};
+    var action = cfg.kitMemberFormAction;
+    var email = member && member.auth && member.auth.email;
+    if (!action || !email) return Promise.resolve(null);
+
+    return get().then(function (state) {
+      if (state.kitSynced) return null;
+      return fetch(action, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({ email_address: email }).toString()
+      })
+        .then(function () { return merge({ kitSynced: true }); })
+        .catch(function () { return null; });
+    });
+  }
+
+  return { get: get, merge: merge, syncToKit: syncToKit };
 })();

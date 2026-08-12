@@ -308,6 +308,20 @@ personal support, book a one-on-one session.</p>
   });
 
   highlightRecommended();
+
+  // Members land here after purchase, so this is where most first syncs happen.
+  if (window.MFLState) {
+    (function waitForMs(n) {
+      if (window.$memberstackDom) {
+        window.$memberstackDom.getCurrentMember().then(function (res) {
+          var m = res && res.data;
+          if (m && hasActivePlan(m)) window.MFLState.syncToKit(m);
+        }).catch(function () {});
+      } else if (n < 50) {
+        setTimeout(function () { waitForMs(n + 1); }, 100);
+      }
+    })(0);
+  }
 </script>
 </body>
 </html>
