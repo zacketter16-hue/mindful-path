@@ -990,7 +990,10 @@ footer a { text-decoration: underline; }
   width: 1.4rem;
 }
 
-.quiz-cta-block { text-align: center; }
+.quiz-cta-block {
+  text-align: center;
+  margin-bottom: 2.2rem;
+}
 
 .quiz-result-cta {
   display: inline-block;

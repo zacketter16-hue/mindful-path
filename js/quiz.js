@@ -238,13 +238,14 @@
       '<h2 class="quiz-result-title">' + topic.name + " Playbook</h2>" +
       '<p class="quiz-result-blurb">' + topic.blurb + "</p>" +
       '<p class="quiz-result-disclaimer">This isn\'t a diagnosis — it\'s where we\'d suggest starting based on your answers. You get every playbook either way.</p>' +
-      '<div class="quiz-included">' +
-        "<h3>Your membership includes</h3>" +
-        '<ul class="quiz-included-list">' + list + "</ul>" +
-      "</div>" +
+      // CTA sits above the value list so it is visible without scrolling.
       '<div class="quiz-cta-block">' +
         '<a class="btn quiz-result-cta" href="/index.html#auth-section">Start My Free Trial</a>' +
         '<p class="quiz-result-sub">3 days free, then $24.99/month. Cancel anytime.</p>' +
+      "</div>" +
+      '<div class="quiz-included">' +
+        "<h3>Your membership includes</h3>" +
+        '<ul class="quiz-included-list">' + list + "</ul>" +
       "</div>" +
       '<p class="quiz-result-trust">Created by Zack Etter, LPC, CMPC — licensed therapist and certified mental performance coach.</p>';
 
