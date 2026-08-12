@@ -141,6 +141,11 @@
   var elEmail = document.getElementById("quiz-email-step");
   var elResult = document.getElementById("quiz-result-step");
 
+  // Skill playbooks rather than presenting problems. They stay in the
+  // membership and still collect points from answers, but are never the
+  // recommended starting point — nobody's core issue is "goal setting".
+  var NEVER_RECOMMEND = { "goal-setting": true, adjustment: true };
+
   function score() {
     var totals = {};
     answers.forEach(function (choice) {
@@ -150,9 +155,10 @@
     });
     var best = null;
     Object.keys(totals).forEach(function (k) {
+      if (NEVER_RECOMMEND[k]) return;
       if (!best || totals[k] > totals[best]) best = k;
     });
-    return best || "goal-setting";
+    return best || "anxiety";
   }
 
   function renderQuestion() {
