@@ -34,7 +34,7 @@
       var loginLi = document.getElementById("nav-login");
       var joinLi = document.getElementById("nav-join");
       var logoutLi = document.getElementById("nav-logout");
-      var accountLi = document.getElementById("nav-account");
+      var accountLink = document.getElementById("account-link");
       var mobileAuth = document.querySelector(".nav-auth-mobile");
       if (member) {
         if (loginLi) loginLi.style.display = "none";
@@ -42,9 +42,9 @@
         if (mobileAuth) mobileAuth.style.display = "none";
         // Members must be able to update their card or cancel without emailing
         // us. Opens Stripe's own billing portal.
-        if (accountLi) {
-          accountLi.style.display = "";
-          accountLi.addEventListener("click", function (e) {
+        if (accountLink) {
+          accountLink.style.display = "";
+          accountLink.addEventListener("click", function (e) {
             e.preventDefault();
             window.$memberstackDom
               .launchStripeCustomerPortal({ returnUrl: "/index.html" })
@@ -67,7 +67,7 @@
         }
       } else {
         if (logoutLi) logoutLi.style.display = "none";
-        if (accountLi) accountLi.style.display = "none";
+        if (accountLink) accountLink.style.display = "none";
       }
     });
   }
