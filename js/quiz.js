@@ -247,6 +247,12 @@
         "<h3>Your membership includes</h3>" +
         '<ul class="quiz-included-list">' + list + "</ul>" +
       "</div>" +
+      // Repeated after the list so someone persuaded by reading it doesn't
+      // have to scroll back up to act.
+      '<div class="quiz-cta-block">' +
+        '<a class="btn quiz-result-cta" href="/index.html#auth-section">Start My Free Trial</a>' +
+        '<p class="quiz-result-sub">3 days free, then $24.99/month. Cancel anytime.</p>' +
+      "</div>" +
       '<p class="quiz-result-trust">Created by Zack Etter, LPC, CMPC — licensed therapist and certified mental performance coach.</p>';
 
     try {
