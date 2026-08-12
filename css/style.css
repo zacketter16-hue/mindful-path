@@ -1083,3 +1083,37 @@ footer a { text-decoration: underline; }
   .quiz-hero h1 { font-size: 1.5rem; }
   .quiz-hero p { font-size: 0.9rem; }
 }
+
+/* ---------- Legal pages ---------- */
+.legal h2 {
+  color: var(--primary-dark);
+  font-size: 1.25rem;
+  margin: 2rem 0 0.6rem;
+}
+
+.legal p, .legal li { margin-bottom: 0.8rem; }
+.legal ul, .legal ol { margin: 0 0 0.8rem 1.3rem; }
+.legal a { color: var(--primary); text-decoration: underline; }
+
+.legal-eff {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.legal-callout {
+  background: var(--card-bg);
+  border-left: 4px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+  padding: 1.2rem 1.4rem;
+}
+
+.footer-legal {
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  opacity: 0.85;
+}
+
+.footer-legal a { text-decoration: underline; }

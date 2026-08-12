@@ -210,6 +210,7 @@ personal support, book a one-on-one session.</p>
 <footer>
   <p>&copy; 2026 The Mental Fitness Lounge. All resources are for educational purposes and are not a substitute for professional medical advice.</p>
   <p style="margin-top:0.5rem;">If you are in crisis, call or text 988 (Suicide & Crisis Lifeline).</p>
+  <p class="footer-legal"><a href="terms.html">Terms of Service</a> · <a href="privacy.html">Privacy Policy</a> · <a href="cancellation.html">Cancellation &amp; Refunds</a></p>
   <p style="margin-top:0.75rem;"><a href="#" id="account-link" style="display:none;">Manage Membership</a></p>
 </footer>
 
@@ -390,13 +391,22 @@ personal support, book a one-on-one session.</p>
     var section = document.getElementById("auth-section");
     if (!section) return;
     var email = (member && member.auth && member.auth.email) || "";
+    // Someone who once had a plan is returning, not signing up — don't tell
+    // them it "isn't active yet" or dangle a free trial they've already used.
+    var lapsed = ((member && member.planConnections) || []).length > 0;
     section.innerHTML =
-      '<h2 style="text-align:center;">Finish setting up your membership</h2>' +
+      '<h2 style="text-align:center;">' +
+      (lapsed ? "Your membership has ended" : "Finish setting up your membership") +
+      "</h2>" +
       '<p style="text-align:center; color:var(--muted);">You\'re signed in as ' +
       email.replace(/</g, "&lt;") +
-      ", but your membership isn't active yet. Your 3 free days start once you add payment details.</p>" +
+      (lapsed
+        ? ". Your membership isn't currently active, so member content is locked. You can restart it any time — your account and saved progress are still here."
+        : ", but your membership isn't active yet. Your 3 free days start once you add payment details.") +
+      "</p>" +
       '<p style="text-align:center; margin-top:1.2rem;">' +
-      '<a class="btn" href="#" id="resume-checkout-btn">Continue to Payment</a></p>' +
+      '<a class="btn" href="#" id="resume-checkout-btn">' +
+      (lapsed ? "Restart My Membership" : "Continue to Payment") + "</a></p>" +
       '<p id="resume-msg" style="text-align:center; color:var(--muted); font-size:0.85rem; margin-top:0.8rem;"></p>' +
       '<p style="text-align:center; margin-top:0.6rem;">' +
       '<a href="#" id="resume-logout" style="color:var(--muted); font-size:0.85rem; text-decoration:underline;">Not you? Log out</a></p>';
