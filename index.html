@@ -188,14 +188,17 @@ personal support, book a one-on-one session.</p>
 </section>
 
 <section class="section" id="auth-section" style="max-width:420px; margin:0 auto;">
-  <h2 style="text-align:center;">Member Login / Sign Up</h2>
+  <h2 id="auth-heading" style="text-align:center;">Member Login / Sign Up</h2>
   <p id="auth-message" style="text-align:center; color:var(--muted);"></p>
   <form id="auth-form" style="display:flex; flex-direction:column; gap:0.8rem;">
     <input type="email" id="auth-email" placeholder="Email" required style="padding:0.7rem; border:1px solid #ccc; border-radius:8px;">
-    <input type="password" id="auth-password" placeholder="Password" required style="padding:0.7rem; border:1px solid #ccc; border-radius:8px;">
-    <button type="submit" id="auth-login-btn" class="btn">Log In</button>
-    <button type="button" id="auth-signup-btn" class="btn" style="background:transparent; color:var(--primary); border:1px solid var(--primary);">Sign Up</button>
+    <input type="password" id="auth-password" placeholder="Choose a password" required style="padding:0.7rem; border:1px solid #ccc; border-radius:8px;">
+    <button type="submit" id="auth-primary-btn" class="btn">Log In</button>
+    <button type="button" id="auth-secondary-btn" class="btn" style="background:transparent; color:var(--primary); border:1px solid var(--primary);">Sign Up</button>
   </form>
+  <p id="auth-reassure" style="display:none; text-align:center; color:var(--muted); font-size:0.85rem; margin-top:0.8rem;">
+    Next step is payment details. You won't be charged for 3 days, and you can cancel anytime.
+  </p>
 </section>
 
 <section class="section" style="text-align:center;">
@@ -272,40 +275,84 @@ personal support, book a one-on-one session.</p>
     });
   }
 
-  document.getElementById("auth-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-    var email = document.getElementById("auth-email").value;
-    var password = document.getElementById("auth-password").value;
+  function credentials() {
+    return {
+      email: document.getElementById("auth-email").value,
+      password: document.getElementById("auth-password").value
+    };
+  }
+
+  function afterAuth(res) {
+    var member = res && res.data && res.data.member;
+    return persistQuizTopic().then(function () { goToCheckoutOrRedirect(member); });
+  }
+
+  function doLogin() {
+    var c = credentials();
+    if (!c.email || !c.password) {
+      authMsg.textContent = "Enter your email and password.";
+      return;
+    }
     authMsg.textContent = "Logging in...";
-    window.$memberstackDom.loginMemberEmailPassword({ email: email, password: password })
-      .then(function (res) {
-        var member = res && res.data && res.data.member;
-        return persistQuizTopic().then(function () { goToCheckoutOrRedirect(member); });
-      })
+    window.$memberstackDom.loginMemberEmailPassword(c)
+      .then(afterAuth)
       .catch(function (err) {
         authMsg.textContent = "Login failed: " + (err && err.message ? err.message : "check your email/password.");
       });
-  });
+  }
 
-  document.getElementById("auth-signup-btn").addEventListener("click", function () {
-    var email = document.getElementById("auth-email").value;
-    var password = document.getElementById("auth-password").value;
-    if (!email || !password) {
-      authMsg.textContent = "Enter an email and password, then click Sign Up.";
+  function doSignup() {
+    var c = credentials();
+    if (!c.email || !c.password) {
+      authMsg.textContent = "Enter an email and choose a password to continue.";
       return;
     }
-    authMsg.textContent = "Signing up...";
-    window.$memberstackDom.signupMemberEmailPassword({
-      email: email,
-      password: password
-    })
-      .then(function (res) {
-        var member = res && res.data && res.data.member;
-        return persistQuizTopic().then(function () { goToCheckoutOrRedirect(member); });
-      })
+    authMsg.textContent = "Creating your account...";
+    window.$memberstackDom.signupMemberEmailPassword(c)
+      .then(afterAuth)
       .catch(function (err) {
         authMsg.textContent = "Sign up failed: " + (err && err.message ? err.message : "try again.");
       });
+  }
+
+  var primaryBtn = document.getElementById("auth-primary-btn");
+  var secondaryBtn = document.getElementById("auth-secondary-btn");
+  // Default (someone clicked "Log In" in the nav): logging in is the primary
+  // action. Someone arriving from the quiz gets this flipped below.
+  var primaryAction = doLogin;
+
+  // Arriving from the quiz means they are almost certainly new and have just
+  // given us their email — so lead with signup, prefill it, and frame the step
+  // as part of starting the trial rather than as an account chore.
+  var quizEmail = null;
+  try { quizEmail = sessionStorage.getItem("mfl-quiz-email"); } catch (e) {}
+
+  if (quizEmail || window.location.search.indexOf("join=1") !== -1) {
+    primaryAction = doSignup;
+    document.getElementById("auth-heading").textContent = "Start your free trial";
+    primaryBtn.textContent = "Continue to Payment";
+    secondaryBtn.textContent = "I already have an account";
+    document.getElementById("auth-reassure").style.display = "";
+    if (quizEmail) {
+      document.getElementById("auth-email").value = quizEmail;
+      document.getElementById("auth-password").focus();
+    }
+    // Put the primary action first visually.
+    primaryBtn.parentNode.insertBefore(primaryBtn, secondaryBtn);
+  }
+
+  document.getElementById("auth-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    primaryAction();
+  });
+
+  primaryBtn.addEventListener("click", function (e) {
+    e.preventDefault();
+    primaryAction();
+  });
+
+  secondaryBtn.addEventListener("click", function () {
+    (primaryAction === doSignup ? doLogin : doSignup)();
   });
 
   highlightRecommended();

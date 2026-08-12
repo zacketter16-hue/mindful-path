@@ -1055,3 +1055,28 @@ footer a { text-decoration: underline; }
   padding: 0.32rem 0.95rem;
   text-transform: uppercase;
 }
+
+/* Quiz landing hero: kept compact so the first question and its answers are
+   visible without scrolling on a phone. */
+.quiz-hero {
+  padding: 1.6rem 1.25rem;
+}
+
+.quiz-hero h1 {
+  font-size: 1.85rem;
+  line-height: 1.2;
+  margin-bottom: 0.4rem;
+}
+
+.quiz-hero p {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  margin: 0 auto;
+  max-width: 34rem;
+}
+
+@media (max-width: 600px) {
+  .quiz-hero { padding: 1.2rem 1rem; }
+  .quiz-hero h1 { font-size: 1.5rem; }
+  .quiz-hero p { font-size: 0.9rem; }
+}

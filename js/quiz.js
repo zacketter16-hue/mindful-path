@@ -196,6 +196,9 @@
     btn.disabled = true;
     msg.textContent = "";
 
+    // Carried to the signup form so they never retype it.
+    try { sessionStorage.setItem("mfl-quiz-email", email); } catch (e) {}
+
     var payload = {
       email: email,
       recommendedTopic: result,
