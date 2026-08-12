@@ -81,8 +81,11 @@
       a: [
         { t: "Tense, distant, or painful", w: { breakup: 4 } },
         { t: "I'm stuck on someone I can't move past", w: { breakup: 4, grief: 1 } },
-        { t: "I can't fully be myself around people", w: { sexuality: 3, "self-esteem": 1 } },
-        { t: "They're solid — not my problem right now", w: {} }
+        // Decisive, and worded so it can only mean identity/intimacy rather
+        // than general social discomfort, which belongs to anxiety.
+        { t: "Intimacy or my sense of identity is the hard part", w: { sexuality: 7 } },
+        // Ruling relationships out points back at what someone carries alone.
+        { t: "They're solid — not my problem right now", w: { anxiety: 1, "self-esteem": 1 } }
       ]
     },
     {
@@ -115,10 +118,14 @@
     {
       q: "Where are you with work and money?",
       a: [
-        { t: "Money is a real source of stress", w: { "job-loss": 3 } },
+        // Decisive: naming money as the pressure should not be outscored by a
+        // topic that merely accumulated points across other questions.
+        { t: "Money is a real source of stress", w: { "job-loss": 8 } },
         { t: "I don't know what I'm working toward", w: { "goal-setting": 2, adjustment: 2 } },
         { t: "I've lost confidence in what I'm good at", w: { "self-esteem": 2, "job-loss": 1 } },
-        { t: "That part of life is steady", w: {} }
+        // Ruling out money as the source of pressure is informative, not
+        // neutral — it makes a general-stress read more likely.
+        { t: "That part of life is steady", w: { anxiety: 1 } }
       ]
     },
     {
