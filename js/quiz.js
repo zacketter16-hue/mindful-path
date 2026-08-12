@@ -25,7 +25,7 @@
         { t: "My mind won't stop racing", w: { anxiety: 3, "injury-illness": 1 } },
         { t: "I've felt flat, heavy, or numb", w: { depression: 3, adjustment: 1 } },
         { t: "I can't focus or finish anything", w: { adhd: 3, adjustment: 1 } },
-        { t: "I've been stuck on someone or something I lost", w: { grief: 3, breakup: 1 } }
+        { t: "I've been stuck on someone or something I lost", w: { grief: 3, breakup: 2 } }
       ]
     },
     {
@@ -41,7 +41,7 @@
       q: "Where do you feel the most pressure right now?",
       a: [
         { t: "Money, work, or job security", w: { "job-loss": 3 } },
-        { t: "My relationship or dating life", w: { breakup: 3 } },
+        { t: "My relationship or dating life", w: { breakup: 4 } },
         { t: "My health, energy, or body", w: { "injury-illness": 3 } },
         { t: "Who I am and where I'm headed", w: { sexuality: 2, "goal-setting": 2 } }
       ]
@@ -58,8 +58,11 @@
     {
       q: "Is there a habit or behavior you keep going back to, even when it costs you?",
       a: [
-        { t: "Yes — and I've tried to stop more than once", w: { addiction: 4 } },
-        { t: "Sometimes, when I'm stressed", w: { addiction: 2, anxiety: 1 } },
+        // Deliberately decisive: someone naming a habit they have repeatedly
+        // failed to stop should land on Addiction rather than a topic that
+        // merely scores well overall.
+        { t: "Yes — and I've tried to stop more than once", w: { addiction: 9 } },
+        { t: "Sometimes, when I'm stressed", w: { addiction: 3, anxiety: 1 } },
         { t: "I avoid things instead — I shut down", w: { depression: 2, adjustment: 2 } },
         { t: "No, that's not really my struggle", w: {} }
       ]
@@ -71,6 +74,51 @@
         { t: "I blame myself and it sticks", w: { "self-esteem": 3, depression: 1 } },
         { t: "I lose all momentum on everything else", w: { adjustment: 3 } },
         { t: "I push through and don't process it", w: { "injury-illness": 2, grief: 2 } }
+      ]
+    },
+    {
+      q: "How do your closest relationships feel right now?",
+      a: [
+        { t: "Tense, distant, or painful", w: { breakup: 4 } },
+        { t: "I'm stuck on someone I can't move past", w: { breakup: 4, grief: 1 } },
+        { t: "I can't fully be myself around people", w: { sexuality: 3, "self-esteem": 1 } },
+        { t: "They're solid — not my problem right now", w: {} }
+      ]
+    },
+    {
+      q: "How often does worry get in the way of what you're doing?",
+      a: [
+        { t: "Most days — it's always running in the background", w: { anxiety: 4 } },
+        { t: "Mainly when something big is coming up", w: { anxiety: 3, "goal-setting": 1 } },
+        { t: "Mostly around other people", w: { anxiety: 3, "self-esteem": 2 } },
+        { t: "Not often", w: {} }
+      ]
+    },
+    {
+      q: "How do you talk about yourself when nobody's listening?",
+      a: [
+        { t: "Harshly — I'm my own worst critic", w: { "self-esteem": 4 } },
+        { t: "I measure myself against everyone else", w: { "self-esteem": 4, breakup: 1 } },
+        { t: "I second-guess nearly every decision", w: { "self-esteem": 3, anxiety: 2 } },
+        { t: "Fairly kindly, most of the time", w: {} }
+      ]
+    },
+    {
+      q: "What are your nights like?",
+      a: [
+        { t: "I lie awake with my mind going", w: { anxiety: 3 } },
+        { t: "I sleep, but wake up just as tired", w: { "injury-illness": 3, depression: 1 } },
+        { t: "My schedule is all over the place", w: { adhd: 2, adjustment: 1 } },
+        { t: "Sleep is one thing that's fine", w: {} }
+      ]
+    },
+    {
+      q: "Where are you with work and money?",
+      a: [
+        { t: "Money is a real source of stress", w: { "job-loss": 3 } },
+        { t: "I don't know what I'm working toward", w: { "goal-setting": 2, adjustment: 2 } },
+        { t: "I've lost confidence in what I'm good at", w: { "self-esteem": 2, "job-loss": 1 } },
+        { t: "That part of life is steady", w: {} }
       ]
     },
     {
