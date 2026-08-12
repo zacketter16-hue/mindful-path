@@ -20,7 +20,7 @@
 
   var QUESTIONS = [
     {
-      q: "When you think about the past two weeks, what has been hardest?",
+      q: "Which of these best describes your past two weeks?",
       a: [
         { t: "My mind won't stop racing", w: { anxiety: 3, "injury-illness": 1 } },
         { t: "I've felt flat, heavy, or numb", w: { depression: 3, adjustment: 1 } },
@@ -52,7 +52,10 @@
         { t: "Wired and on edge — I can't relax", w: { anxiety: 3 } },
         { t: "Completely drained, even after resting", w: { "injury-illness": 3, depression: 1 } },
         { t: "It comes in bursts, then disappears", w: { adhd: 2, adjustment: 2 } },
-        { t: "Steady — energy isn't my problem", w: { "goal-setting": 2 } }
+        // Only scored Goal Setting, which is never recommended, so this was a
+        // dead answer. Same eliminative logic as the money question: energy
+        // being fine rules out depletion and points at the cognitive reads.
+        { t: "Steady — energy isn't my problem", w: { anxiety: 1, "self-esteem": 1 } }
       ]
     },
     {
@@ -68,7 +71,7 @@
       ]
     },
     {
-      q: "When something goes wrong, what happens next for you?",
+      q: "When something goes wrong, what tends to happen next?",
       a: [
         { t: "I replay it over and over", w: { anxiety: 2, "self-esteem": 2 } },
         { t: "I blame myself and it sticks", w: { "self-esteem": 3, depression: 1 } },
@@ -81,9 +84,11 @@
       a: [
         { t: "Tense, distant, or painful", w: { breakup: 4 } },
         { t: "I'm stuck on someone I can't move past", w: { breakup: 4, grief: 1 } },
-        // Decisive, and worded so it can only mean identity/intimacy rather
-        // than general social discomfort, which belongs to anxiety.
-        { t: "Intimacy or my sense of identity is the hard part", w: { sexuality: 7 } },
+        // Decisive, and names sexuality plainly. Intimacy is deliberately not
+        // mentioned: difficulty with intimacy on its own is covered by the
+        // Relationships & Breakups playbook, so bundling the two here would
+        // route people into Sexuality who never meant that.
+        { t: "Understanding or accepting my sexuality", w: { sexuality: 7 } },
         // Ruling relationships out points back at what someone carries alone.
         { t: "They're solid — not my problem right now", w: { anxiety: 1, "self-esteem": 1 } }
       ]
@@ -93,12 +98,12 @@
       a: [
         { t: "Most days — it's always running in the background", w: { anxiety: 4 } },
         { t: "Mainly when something big is coming up", w: { anxiety: 3, "goal-setting": 1 } },
-        { t: "Mostly around other people", w: { anxiety: 3, "self-esteem": 2 } },
+        { t: "Mainly in social situations — I worry what people think", w: { anxiety: 3, "self-esteem": 2 } },
         { t: "Not often", w: {} }
       ]
     },
     {
-      q: "How do you talk about yourself when nobody's listening?",
+      q: "How do you talk to yourself?",
       a: [
         { t: "Harshly — I'm my own worst critic", w: { "self-esteem": 4 } },
         { t: "I measure myself against everyone else", w: { "self-esteem": 4, breakup: 1 } },
@@ -111,12 +116,12 @@
       a: [
         { t: "I lie awake with my mind going", w: { anxiety: 3 } },
         { t: "I sleep, but wake up just as tired", w: { "injury-illness": 3, depression: 1 } },
-        { t: "My schedule is all over the place", w: { adhd: 2, adjustment: 1 } },
-        { t: "Sleep is one thing that's fine", w: {} }
+        { t: "No consistency, my schedule is all over the place", w: { adhd: 2, adjustment: 1 } },
+        { t: "Sleep is fine right now", w: {} }
       ]
     },
     {
-      q: "Where are you with work and money?",
+      q: "How are you doing with work and money?",
       a: [
         // Decisive: naming money as the pressure should not be outscored by a
         // topic that merely accumulated points across other questions.
@@ -129,7 +134,7 @@
       ]
     },
     {
-      q: "If one thing changed in the next 90 days, what would matter most?",
+      q: "If you had all the mental skills necessary to handle life's issues, what changes might you see in yourself?",
       a: [
         { t: "Feeling calmer and more in control", w: { anxiety: 3 } },
         { t: "Feeling like myself again", w: { depression: 2, grief: 2 } },
