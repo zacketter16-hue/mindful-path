@@ -1,6 +1,7 @@
 {
   "permissions": {
     "allow": [
+      "mcp__memberstack",
       "Bash(python3 -m http.server 8000)",
       "Bash(gh auth *)",
       "Bash(git --version)",
@@ -57,7 +58,35 @@
       "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/course-materials/depression/Depression Treatment.docx\" /tmp/depression-treatment-unpacked/)",
       "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Treatment for ADHD.docx\" /tmp/adhd-treatment-unpacked/)",
       "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Healthy Relationships.docx\" /tmp/healthy-relationships-unpacked/)",
-      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Attachment.docx\" /tmp/attachment-unpacked/)"
+      "Bash(python3 scripts/office/unpack.py \"/Users/zack/Downloads/MFP V1/Attachment.docx\" /tmp/attachment-unpacked/)",
+      "Bash(pandoc -t markdown \"/Users/zack/Downloads/Understanding Breakups.docx\")",
+      "Bash(pandoc --version)",
+      "Bash(find \"/Users/zack/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin\" -ipath \"*docx*office*\" 2>/dev/null | head -20; which soffice libreoffice 2>&1)",
+      "Bash(mkdir -p /Users/zack/.claude/projects/-Users-zack-Downloads-MFP-V1/memory/)",
+      "Bash(awk '/<details class=\"module\">/{print NR\": \"$0} /<\\\\/details>/{print NR\": \"$0}' topics/breakup.html)",
+      "Bash(awk '/<details class=\"module\">/{print NR\": \"$0} /<\\\\/details>/{print NR\": \"$0} /module-title/{print NR\": \"$0}' topics/anxiety.html)",
+      "Read(//Users/zack/Library/Mobile Documents/com~apple~CloudDocs/**)",
+      "Bash(cp \"/Users/zack/Library/Mobile Documents/com~apple~CloudDocs/Coping Skills for Anxiety.docx\" \"/private/tmp/claude-501/-Users-zack-Downloads-MFP-V1/15d35bb5-76ee-4f7e-b266-9aff3d6ee126/scratchpad/coping_anxiety_docx/source.docx\" 2>&1)",
+      "Read(//Users/zack/Downloads/**)",
+      "Bash(md5 \"/Users/zack/Downloads/Understanding Breakups.docx\")",
+      "Bash(shasum \"/Users/zack/Downloads/Understanding Breakups.docx\")",
+      "Bash(awk '/<details class=\"module\">/{print NR\": \"$0} /module-num|module-title/{print NR\": \"$0} /<\\\\/details>/{print NR\": \"$0}' topics/job-loss.html)",
+      "Bash(read -r f)",
+      "Bash(awk -F'\\\\t' '{print $1, $2}')",
+      "Bash(awk -F'\\\\t' '{print $1, $2, $3, $5}')",
+      "Bash(awk -F'\\\\t' '{print $1, $5}')",
+      "Bash(awk -F'\\\\t' '{print $1}')",
+      "mcp__f28041fa-c34e-47db-98d6-0340eed0e07d__currentApp",
+      "mcp__f28041fa-c34e-47db-98d6-0340eed0e07d__getDataTables",
+      "mcp__f28041fa-c34e-47db-98d6-0340eed0e07d__getPlans",
+      "mcp__f28041fa-c34e-47db-98d6-0340eed0e07d__getContentGroups",
+      "Bash(git fetch *)",
+      "Skill(update-config)",
+      "Skill(update-config:*)",
+      "Bash(pkill -f \"http.server 8080\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"playbook_keytakeaways_anxiety2_dark.png\" --window-size=1100,860 --default-background-color=00000000 --hide-scrollbars \"file://$\\(pwd\\)/playbook_keytakeaways_anxiety2_dark.html\")",
+      "Bash(python3 -c \"print\\('css bytes:', len\\(open\\('/Users/zack/Downloads/MFP V1/css/style.css'\\).read\\(\\)\\)\\)\")",
+      "Bash(\"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome\" --headless --disable-gpu --screenshot=\"kt_breakup_3.png\" --window-size=1100,955 --default-background-color=00000000 --hide-scrollbars \"file://$\\(pwd\\)/kt_breakup_3.html\")"
     ]
   }
 }
