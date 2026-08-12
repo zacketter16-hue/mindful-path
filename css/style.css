@@ -1027,20 +1027,31 @@ footer a { text-decoration: underline; }
 
 .quiz-header .logo-img { height: 54px; }
 
+/* The member's quiz-matched playbook. Emphasis comes from colour, ring and
+   shadow rather than transform, since these cards already run a float
+   animation that owns the transform property. */
 .widget-card-recommended {
+  background: linear-gradient(180deg, #fbf3f3 0%, var(--card-bg) 60%);
   border: 2px solid var(--primary);
+  border-top: 6px solid var(--primary);
+  box-shadow:
+    0 0 0 4px rgba(92, 26, 26, 0.12),
+    0 12px 28px rgba(92, 26, 26, 0.20);
   position: relative;
 }
+
+.widget-card-recommended h3 { color: var(--primary-dark); }
 
 .widget-badge {
   background: var(--primary);
   border-radius: 999px;
+  box-shadow: 0 3px 10px rgba(92, 26, 26, 0.35);
   color: #fff;
   display: inline-block;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.6rem;
-  padding: 0.2rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  margin-bottom: 0.85rem;
+  padding: 0.32rem 0.95rem;
   text-transform: uppercase;
 }
