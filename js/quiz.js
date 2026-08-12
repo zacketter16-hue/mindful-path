@@ -265,10 +265,18 @@
     // Carried to the signup form so they never retype it.
     try { sessionStorage.setItem("mfl-quiz-email", email); } catch (e) {}
 
+    // Stored as question → answer pairs rather than a bare list of answers, so
+    // the table is readable without counting positions against the question
+    // order — which also stops old rows becoming unreadable when questions
+    // are added, removed, or reworded.
     var payload = {
       email: email,
       recommendedTopic: result,
-      answers: JSON.stringify(answers.map(function (a) { return a.t; }))
+      answers: answers
+        .map(function (a, i) {
+          return (i + 1) + ". " + QUESTIONS[i].q + "\n   → " + a.t;
+        })
+        .join("\n\n")
     };
 
     // Kit (email marketing) is the list that actually gets emailed; the
