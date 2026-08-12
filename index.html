@@ -383,6 +383,45 @@ personal support, book a one-on-one session.</p>
       '<a class="btn" href="#playbooks-heading">Browse the Playbooks</a></p>';
   }
 
+  // Someone who created an account but abandoned Stripe checkout comes back
+  // logged in with no plan. Without this they were shown a signup form telling
+  // them to create an account they already have — with no way to reach payment.
+  function showResumeCheckout(member) {
+    var section = document.getElementById("auth-section");
+    if (!section) return;
+    var email = (member && member.auth && member.auth.email) || "";
+    section.innerHTML =
+      '<h2 style="text-align:center;">Finish setting up your membership</h2>' +
+      '<p style="text-align:center; color:var(--muted);">You\'re signed in as ' +
+      email.replace(/</g, "&lt;") +
+      ", but your membership isn't active yet. Your 3 free days start once you add payment details.</p>" +
+      '<p style="text-align:center; margin-top:1.2rem;">' +
+      '<a class="btn" href="#" id="resume-checkout-btn">Continue to Payment</a></p>' +
+      '<p id="resume-msg" style="text-align:center; color:var(--muted); font-size:0.85rem; margin-top:0.8rem;"></p>' +
+      '<p style="text-align:center; margin-top:0.6rem;">' +
+      '<a href="#" id="resume-logout" style="color:var(--muted); font-size:0.85rem; text-decoration:underline;">Not you? Log out</a></p>';
+
+    document.getElementById("resume-checkout-btn").addEventListener("click", function (e) {
+      e.preventDefault();
+      document.getElementById("resume-msg").textContent = "Redirecting to checkout...";
+      window.$memberstackDom.purchasePlansWithCheckout({
+        priceId: cfg.priceId,
+        successUrl: window.location.origin + "/index.html?welcome=1",
+        cancelUrl: window.location.href
+      }).catch(function (err) {
+        document.getElementById("resume-msg").textContent =
+          "Checkout failed: " + (err && err.message ? err.message : "please try again.");
+      });
+    });
+
+    document.getElementById("resume-logout").addEventListener("click", function (e) {
+      e.preventDefault();
+      window.$memberstackDom.logout().then(function () {
+        window.location.href = "/index.html";
+      });
+    });
+  }
+
   (function onLoadMemberState(n) {
     if (!window.$memberstackDom) {
       if (n < 50) setTimeout(function () { onLoadMemberState(n + 1); }, 100);
@@ -391,7 +430,8 @@ personal support, book a one-on-one session.</p>
     var justPurchased = window.location.search.indexOf("welcome=1") !== -1;
     window.$memberstackDom.getCurrentMember().then(function (res) {
       var m = res && res.data;
-      if (!m || !hasActivePlan(m)) return;
+      if (!m) return;
+      if (!hasActivePlan(m)) { showResumeCheckout(m); return; }
 
       if (window.MFLState) window.MFLState.syncToKit(m);
       showMemberConfirmation(justPurchased);
