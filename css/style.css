@@ -1117,3 +1117,45 @@ footer a { text-decoration: underline; }
 }
 
 .footer-legal a { text-decoration: underline; }
+
+/* ---------- Quiz intro screen ---------- */
+#quiz-intro { text-align: left; }
+
+.quiz-intro-title {
+  color: var(--primary);
+  font-size: 1.6rem;
+  line-height: 1.25;
+  margin-bottom: 0.9rem;
+}
+
+#quiz-intro p {
+  font-size: 1.02rem;
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
+}
+
+.quiz-intro-lead { font-size: 1.1rem; }
+
+#quiz-intro strong { color: var(--primary-dark); }
+
+.quiz-intro-fine {
+  color: var(--muted);
+  font-size: 0.92rem;
+  margin-top: 1.2rem;
+}
+
+.quiz-start-btn {
+  border: 0;
+  cursor: pointer;
+  display: block;
+  font-family: inherit;
+  font-size: 1.1rem;
+  margin-top: 1.4rem;
+  padding: 0.9rem 2.4rem;
+  width: 100%;
+}
+
+@media (min-width: 600px) {
+  .quiz-start-btn { width: auto; }
+  .quiz-intro-title { font-size: 1.85rem; }
+}
