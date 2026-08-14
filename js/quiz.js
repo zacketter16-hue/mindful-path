@@ -313,23 +313,5 @@
     Promise.all(saves).then(showResult, showResult);
   });
 
-  // Intro screen: gives people a moment to understand what they're starting
-  // before the first question, which otherwise opens on a heavy one.
-  var elIntro = document.getElementById("quiz-intro");
-  var startBtn = document.getElementById("quiz-start-btn");
-
-  function beginQuiz() {
-    if (elIntro) elIntro.style.display = "none";
-    elProgress.style.display = "";
-    elQuiz.style.display = "";
-    renderQuestion();
-  }
-
-  if (elIntro && startBtn) {
-    startBtn.addEventListener("click", beginQuiz);
-  } else {
-    // No intro markup (older cached page) — go straight in rather than
-    // showing a blank screen.
-    beginQuiz();
-  }
+  renderQuestion();
 })();
