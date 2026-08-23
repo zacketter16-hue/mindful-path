@@ -1,0 +1,36 @@
+name: Supabase keep-alive
+
+# Supabase pauses free-tier projects after ~7 days with no API activity. That
+# would break reflection saving inside the 12 playbooks (js/reflection.js), so
+# this makes a small request every few days to reset the clock.
+#
+# The key below is the publishable key — it is already public in the site's
+# JavaScript, so there is nothing secret here.
+
+on:
+  schedule:
+    - cron: "17 9 */3 * *"   # 09:17 UTC, every third day
+  workflow_dispatch:          # also runnable by hand from the Actions tab
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping the Supabase REST API
+        run: |
+          set -uo pipefail
+          URL="https://zoqceibrpfscjnjetpyb.supabase.co/rest/v1/reflection_responses?select=id&limit=1"
+          KEY="sb_publishable_vpFdsZTstcb-GoVUYqavxw_zRzuqLeh"
+
+          code=$(curl -sS -o /tmp/out.txt -w "%{http_code}" "$URL" \
+            -H "apikey: $KEY" -H "Authorization: Bearer $KEY")
+
+          echo "HTTP $code"
+          echo "Response: $(head -c 300 /tmp/out.txt)"
+
+          if [ "$code" != "200" ]; then
+            echo "::error::Supabase returned $code. The project may be paused, or the key rotated. Reflection saving in the playbooks is probably broken."
+            exit 1
+          fi
+
+          echo "Project is awake. Reflection saving is reachable."
