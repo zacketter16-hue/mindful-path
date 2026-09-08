@@ -356,7 +356,11 @@ personal support, book a one-on-one session.</p>
     // they are signing in or creating an account.
     authMsg.textContent =
       "Choose a password to create your account. Already have one? Log in below.";
-    primaryBtn.textContent = "Continue to Payment";
+    // "Create an Account" rather than "Continue to Payment": this step really
+    // does create the account, and jumping straight to payment language right
+    // after a free-trial CTA reads as a bait and switch. The reassurance line
+    // below still discloses that payment details come next.
+    primaryBtn.textContent = "Create an Account";
     secondaryBtn.textContent = "I already have an account";
     document.getElementById("auth-reassure").style.display = "";
     if (quizEmail) {
