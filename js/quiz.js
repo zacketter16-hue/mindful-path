@@ -173,8 +173,22 @@
     return best || "anxiety";
   }
 
+  // Cloudflare's beacon fires on history changes (verified against the live
+  // site), so giving each step its own URL turns the quiz into a funnel in the
+  // analytics dashboard — you can see which question people quit on.
+  // replaceState rather than pushState: the quiz has its own Back control and
+  // pushing entries would make the browser's Back button move the URL without
+  // moving the question. A query string rather than a fake path so a reload
+  // still serves the real page instead of a 404.
+  function trackStep(step) {
+    try {
+      history.replaceState(null, "", "/quiz/?step=" + step);
+    } catch (e) {}
+  }
+
   function renderQuestion() {
     var item = QUESTIONS[current];
+    trackStep("q" + (current + 1));
     elProgress.textContent = "Question " + (current + 1) + " of " + QUESTIONS.length;
     elProgress.style.width = "";
     var html = '<h2 class="quiz-q">' + item.q + "</h2>";
@@ -210,6 +224,7 @@
   }
 
   function showEmailStep() {
+    trackStep("email");
     result = score();
     elQuiz.style.display = "none";
     elProgress.style.display = "none";
@@ -225,6 +240,7 @@
   ];
 
   function showResult() {
+    trackStep("result");
     var topic = TOPICS[result];
     elEmail.style.display = "none";
     elResult.style.display = "";
