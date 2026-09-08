@@ -201,6 +201,59 @@ nav a:hover { color: var(--primary); }
   font-size: 1.15rem;
 }
 
+/* ---------- Hero Quiz CTA ---------- */
+/* The whole card is one link, so the inner "button" is a styled span. */
+.hero-cta {
+  display: block;
+  max-width: 640px;
+  margin: 1.5rem auto 0;
+  padding: 1.8rem 1.5rem;
+  background: #fff;
+  border-radius: var(--radius);
+  box-shadow: 0 6px 22px rgba(0,0,0,0.18);
+  text-align: center;
+  text-decoration: none;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.hero-cta:hover,
+.hero-cta:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(0,0,0,0.24);
+}
+
+.hero-cta-title {
+  display: block;
+  color: var(--primary-dark);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.5rem;
+}
+
+.hero-cta-sub {
+  display: block;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.45;
+  max-width: 460px;
+  margin: 0 auto 1.3rem;
+}
+
+.hero-cta-btn {
+  display: inline-block;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.7rem 2.1rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.hero-cta:hover .hero-cta-btn {
+  background: var(--primary-dark);
+}
+
 /* ---------- Coach Banner ---------- */
 .coach-banner {
   max-width: 1100px;
@@ -832,6 +885,10 @@ footer a { text-decoration: underline; }
   .dropdown-menu li a {
     padding: 0.6rem 0;
   }
+  .hero-cta { padding: 1.4rem 1.1rem; margin-top: 1.2rem; }
+  .hero-cta-title { font-size: 1.4rem; }
+  .hero-cta-sub { font-size: 0.95rem; margin-bottom: 1.1rem; }
+  .hero-cta-btn { padding: 0.65rem 1.7rem; font-size: 1rem; }
   .coach-banner { flex-direction: column; justify-content: center; gap: 0.6rem; }
   .coach-banner-top { flex-wrap: nowrap; gap: 0.8rem; }
   .coach-banner-text { font-size: 1.35rem; }
