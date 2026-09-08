@@ -463,6 +463,15 @@ personal support, book a one-on-one session.</p>
     window.$memberstackDom.getCurrentMember().then(function (res) {
       var m = res && res.data;
       if (!m) return;
+
+      // Anyone signed in has already been through the quiz funnel — whether
+      // they are paying or still need to finish checkout — so the "get your
+      // free playbook" pitch is noise for them. Hidden here rather than in CSS
+      // so logged-out visitors, who are the whole point of it, never see it
+      // disappear.
+      var heroCta = document.querySelector(".hero-cta");
+      if (heroCta) heroCta.style.display = "none";
+
       if (!hasActivePlan(m)) { showResumeCheckout(m); return; }
 
       if (window.MFLState) window.MFLState.syncToKit(m);
