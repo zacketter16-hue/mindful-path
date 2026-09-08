@@ -53,14 +53,24 @@ window.MFLState = (function () {
     var email = member && member.auth && member.auth.email;
     if (!action || !email) return Promise.resolve(null);
 
+    // Flag is versioned: a member marked synced by the earlier buggy version
+    // (below) is retried once under the new name, since some paying members
+    // were flagged without ever reaching Kit.
     return get().then(function (state) {
-      if (state.kitSynced) return null;
+      if (state.kitSyncedV2) return null;
       return fetch(action, {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
         body: new URLSearchParams({ email_address: email }).toString()
       })
-        .then(function () { return merge({ kitSynced: true }); })
+        .then(function (res) {
+          // fetch only rejects on network failure, so a 4xx from Kit still
+          // lands here. Without this check a rejected submission marked the
+          // member synced forever and they never got the Member tag — which
+          // means a paying member kept receiving the sales sequence.
+          if (!res.ok) return null;
+          return merge({ kitSyncedV2: true });
+        })
         .catch(function () { return null; });
     });
   }
