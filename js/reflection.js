@@ -1,7 +1,15 @@
+/*
+ * Playbook reflections, stored in the member's own Memberstack member JSON.
+ *
+ * These used to live in a Supabase table that was read with a public key and
+ * no per-member filter, so opening a playbook fetched every member's answers
+ * for it. Member JSON is scoped to the signed-in member by Memberstack, so a
+ * member can only ever read or write their own.
+ *
+ * Shape:  state.reflections["anxiety"]["2-0"] = "their answer text"
+ *                           ^playbook  ^module number + position in module
+ */
 (function () {
-  var SUPABASE_URL = "https://zoqceibrpfscjnjetpyb.supabase.co";
-  var SUPABASE_KEY = "sb_publishable_vpFdsZTstcb-GoVUYqavxw_zRzuqLeh";
-
   function getPlaybookSlug() {
     var match = window.location.pathname.match(/\/([^\/]+)\.html$/);
     return match ? match[1] : "unknown";
@@ -19,7 +27,7 @@
   function init(attempts) {
     var items = document.querySelectorAll(".reflect-item");
     if (!items.length) return;
-    if (!window.$memberstackDom || !window.supabase) {
+    if (!window.$memberstackDom || !window.MFLState) {
       if (attempts < 50) setTimeout(function () { init(attempts + 1); }, 100);
       return;
     }
@@ -27,69 +35,62 @@
     window.$memberstackDom.getCurrentMember().then(function (res) {
       var member = res && res.data;
       if (!member) return;
-      var memberId = member.id;
-      var client = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {
-        global: { headers: { "x-member-id": memberId } }
-      });
       var playbook = getPlaybookSlug();
 
+      // Give every box a stable key: its module number plus its position
+      // within that module, so answers reattach on the next visit.
       var byModule = {};
       items.forEach(function (item) {
         var moduleEl = item.closest(".module");
         var numEl = moduleEl && moduleEl.querySelector(".module-num");
         var moduleNum = numEl ? parseInt(numEl.textContent, 10) : 0;
         byModule[moduleNum] = byModule[moduleNum] || [];
-        var index = byModule[moduleNum].length;
-        byModule[moduleNum].push(item);
         item.dataset.moduleNum = moduleNum;
-        item.dataset.index = index;
+        item.dataset.index = byModule[moduleNum].length;
+        byModule[moduleNum].push(item);
       });
 
-      client
-        .from("reflection_responses")
-        .select("module_num,question_index,answer")
-        .eq("playbook", playbook)
-        .then(function (result) {
-          if (result.error || !result.data) return;
-          result.data.forEach(function (row) {
-            var item = document.querySelector(
-              '.reflect-item[data-module-num="' + row.module_num + '"][data-index="' + row.question_index + '"]'
-            );
-            var textarea = item && item.querySelector(".reflect-answer");
-            if (textarea) textarea.value = row.answer;
-          });
+      // Prefill with whatever this member saved previously.
+      window.MFLState.get().then(function (state) {
+        var saved = (state.reflections && state.reflections[playbook]) || {};
+        items.forEach(function (item) {
+          var textarea = item.querySelector(".reflect-answer");
+          var key = item.dataset.moduleNum + "-" + item.dataset.index;
+          if (textarea && typeof saved[key] === "string") textarea.value = saved[key];
         });
+      });
+
+      // Saves run one after another rather than in parallel. Each re-reads the
+      // member's state first, so answering two boxes in quick succession can't
+      // have one write overwrite the other.
+      var queue = Promise.resolve();
 
       items.forEach(function (item) {
         var textarea = item.querySelector(".reflect-answer");
         var status = item.querySelector(".reflect-status");
-        var questionEl = item.querySelector(".reflect-question");
-        if (!textarea || !questionEl) return;
-        var questionText = questionEl.textContent.trim();
+        if (!textarea) return;
+        var key = item.dataset.moduleNum + "-" + item.dataset.index;
 
         var save = debounce(function () {
+          var value = textarea.value;
           if (status) status.textContent = "Saving…";
-          client
-            .from("reflection_responses")
-            .upsert(
-              {
-                member_id: memberId,
-                playbook: playbook,
-                module_num: parseInt(item.dataset.moduleNum, 10),
-                question_index: parseInt(item.dataset.index, 10),
-                question_text: questionText,
-                answer: textarea.value,
-                updated_at: new Date().toISOString()
-              },
-              { onConflict: "member_id,playbook,module_num,question_index" }
-            )
+          queue = queue
+            .then(function () { return window.MFLState.get(); })
+            .then(function (state) {
+              var all = state.reflections || {};
+              var book = all[playbook] || {};
+              // Drop cleared boxes rather than storing empty strings.
+              if (value.trim()) { book[key] = value; } else { delete book[key]; }
+              all[playbook] = book;
+              return window.MFLState.merge({ reflections: all });
+            })
             .then(function (result) {
-              if (result.error) {
-                console.error("reflection save error:", result.error);
-                if (status) status.textContent = "Error: " + result.error.message;
-              } else if (status) {
-                status.textContent = "Saved";
+              if (status) {
+                status.textContent = result ? "Saved" : "Not saved — check your connection";
               }
+            })
+            .catch(function () {
+              if (status) status.textContent = "Not saved — check your connection";
             });
         }, 800);
 
