@@ -69,6 +69,10 @@
 
 <section class="hero">
   <div class="hero-inner">
+    <!-- Height is reserved by aspect-ratio in the stylesheet rather than by
+         width/height attributes here. Same result, but if a returning visitor
+         has the old CSS cached, no attributes means the logo renders as it
+         always did instead of being stretched to 690px tall. -->
     <img src="images/landing-logo-cropped.png" alt="The Mental Fitness Lounge" class="hero-logo">
   </div>
   <a href="/quiz" class="hero-cta">

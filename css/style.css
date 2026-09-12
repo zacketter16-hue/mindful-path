@@ -186,6 +186,10 @@ nav a:hover { color: var(--primary); }
 .hero-logo {
   max-width: 800px;
   width: 100%;
+  /* Matches the file's real 1536x690 so the slot keeps its height while the
+     image loads, regardless of how the width scales down. */
+  aspect-ratio: 1536 / 690;
+  height: auto;
   margin: 0 auto 0.5rem;
   display: block;
 }
