@@ -1,0 +1,15 @@
+<title>The Mental Fitness Lounge</title>
+<!--
+  Short link for the Instagram bio. Displays as mentalfitnesslounge.com/ig
+  instead of a long tagged URL, but still lands on the quiz carrying its
+  source, so Instagram traffic is attributable even when the app strips the
+  referrer (which it usually does).
+
+  location.replace rather than assignment: no history entry, so Back returns
+  to Instagram rather than bouncing through here again.
+-->
+<meta http-equiv="refresh" content="0; url=/quiz/?utm_source=instagram&utm_medium=bio">
+<script>location.replace("/quiz/?utm_source=instagram&utm_medium=bio");</script>
+<p style="font:16px system-ui;padding:2rem;text-align:center;">
+  Taking you to the quiz… <a href="/quiz/?utm_source=instagram&utm_medium=bio">Continue</a>
+</p>
