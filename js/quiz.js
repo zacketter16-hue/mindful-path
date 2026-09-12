@@ -180,9 +180,25 @@
   // pushing entries would make the browser's Back button move the URL without
   // moving the question. A query string rather than a fake path so a reload
   // still serves the real page instead of a 404.
+  // Whatever the visitor arrived with — utm_source, utm_campaign, and so on.
+  // Captured once at load and carried through every step, because otherwise
+  // the first trackStep call would discard the campaign tags before the
+  // analytics beacon could attribute the visit.
+  var ARRIVAL_PARAMS = (function () {
+    try {
+      var p = new URLSearchParams(window.location.search);
+      p.delete("step");
+      return p.toString();
+    } catch (e) {
+      return "";
+    }
+  })();
+
   function trackStep(step) {
     try {
-      history.replaceState(null, "", "/quiz/?step=" + step);
+      var p = new URLSearchParams(ARRIVAL_PARAMS);
+      p.set("step", step);
+      history.replaceState(null, "", "/quiz/?" + p.toString());
     } catch (e) {}
   }
 
